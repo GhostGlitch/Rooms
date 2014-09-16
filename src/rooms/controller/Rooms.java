@@ -28,7 +28,24 @@ public class Rooms
 				}
 				System.out.print("] ");
 			}
-			System.out.println("");
+			System.out.println();
 		}
+		System.out.println();
+		System.out.println("                          ["+RoomCount()+("]"));
+	}
+	private int RoomCount()
+	{
+		int roomCount = 0;
+		for (int index = 0; index < 7; index++)
+		{
+			for (int index1 = 0; index1 < 7; index1++)
+			{
+				if (Setup[index][index1])
+				{
+					roomCount++;
+				}
+			}
+		}
+		return roomCount;
 	}
 }
