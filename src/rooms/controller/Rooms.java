@@ -3,10 +3,18 @@ package rooms.controller;
 public class Rooms
 {
 	boolean[][] Setup = new boolean[7][7];
+
 	public void RoomSetup()
 	{
 		System.out.println();
 		Setup[3][3] = true;
+		while (!Setup[2][3] && !Setup[4][3] && !Setup[3][2] && !Setup[3][4])
+		{
+			Setup[2][3] = RanBool(.75);
+			Setup[4][3] = RanBool(.75);
+			Setup[3][2] = RanBool(.75);
+			Setup[3][4] = RanBool(.75);
+		}
 		PrintSetup();
 	}
 
@@ -31,8 +39,9 @@ public class Rooms
 			System.out.println();
 		}
 		System.out.println();
-		System.out.println("                          ["+RoomCount()+("]"));
+		System.out.println("                          [" + RoomCount() + ("]"));
 	}
+
 	private int RoomCount()
 	{
 		int roomCount = 0;
