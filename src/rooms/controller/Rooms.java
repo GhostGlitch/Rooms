@@ -2,11 +2,11 @@ package rooms.controller;
 
 public class Rooms
 {
-	boolean[][] Setup = new boolean[7][7];
+	public boolean[][] Setup = new boolean[7][7];
 
 	public void RoomSetup()
 	{
-		while (RoomCount() < 16)
+		while (RoomCount() < 14 || RoomCount() >18)
 		{
 			for (int index = 0; index < 7; index++)
 			{
@@ -64,6 +64,7 @@ public class Rooms
 			Setup[5][6] = RanBool(getSurrounding(5, 6));
 			Setup[6][5] = RanBool(getSurrounding(6, 5));
 			Setup[6][6] = RanBool(getSurrounding(6, 6));
+			// I know there's a much cleaner way of doing that.
 			System.out.println("          [" + RoomCount() + "]");
 			PrintSetup();
 		}
