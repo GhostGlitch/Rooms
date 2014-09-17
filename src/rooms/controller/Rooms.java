@@ -15,32 +15,13 @@ public class Rooms
 			Setup[3][2] = RanBool(.75);
 			Setup[3][4] = RanBool(.75);
 		}
+		System.out.println("          [" + RoomCount() + "]");
 		PrintSetup();
-		thing();
 	}
 
 	private boolean RanBool(double Percent)
 	{
 		return Math.random() < Percent;
-	} 
-
-	private void PrintSetup()
-	{
-		for (int index = 0; index < 7; index++)
-		{
-			for (int index1 = 0; index1 < 7; index1++)
-			{
-				System.out.print("[" + Setup[index][index1]);
-				if (Setup[index][index1])
-				{
-					System.out.print(" ");
-				}
-				System.out.print("] ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println("                          [" + RoomCount() + ("]"));
 	}
 
 	private int RoomCount()
@@ -58,26 +39,26 @@ public class Rooms
 		}
 		return roomCount;
 	}
-	
-	private void thing()
+
+	private void PrintSetup()
 	{
-		System.out.println("                _______________________");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■");
 		for (int index = 0; index < 7; index++)
 		{
-			System.out.print("                |");
+			System.out.print("¦");
 			for (int index1 = 0; index1 < 7; index1++)
 			{
-				if (index == 3 && index1 == 3)
+				if (Setup[index][index1])
 				{
-					System.out.print("[X]");
-				} else if (Setup[index][index1])
+					System.out.print("[■]");
+				}
+				else
 				{
-					System.out.print("[ ]");
-				} else {
-					System.out.print("   ");
+					System.out.print(" ● ");
 				}
 			}
-			System.out.println("|");
+			System.out.println("¦");
 		}
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■");
 	}
 }
