@@ -8,6 +8,13 @@ public class Rooms
 	{
 		while (RoomCount() < 10)
 		{
+			for (int index = 0; index < 7; index++)
+			{
+				for (int index1 = 0; index1 < 7; index1++)
+				{
+					Setup[index][index1] = false;
+				}
+			}
 			System.out.println();
 			Setup[3][3] = true;
 			while (!Setup[2][3] && !Setup[4][3] && !Setup[3][2] && !Setup[3][4])
