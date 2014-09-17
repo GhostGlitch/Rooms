@@ -116,35 +116,44 @@ public class Rooms
 
 	private double getSurrounding(int index, int index1)
 	{
-		double roomCount = 0;
+		int roomCount = 0;
+		double percent = 0;
 		if (index != 6)
 		{
 			if (Setup[index + 1][index1])
 			{
-				roomCount = roomCount + .25;
+				roomCount = roomCount + 1;
 			}
 		}
 		if (index != 0)
 		{
 			if (Setup[index - 1][index1])
 			{
-				roomCount = roomCount + .25;
+				roomCount = roomCount + 1;
 			}
 		}
 		if (index1 != 6)
 		{
 			if (Setup[index][index1 + 1])
 			{
-				roomCount = roomCount + .25;
+				roomCount = roomCount + 1;
 			}
 		}
 		if (index1 != 0)
 		{
 			if (Setup[index][index1 - 1])
 			{
-				roomCount = roomCount + .25;
+				roomCount = roomCount + 1;
 			}
 		}
-		return roomCount;
+		if (roomCount == 1)
+		{
+			percent = .50;
+		}
+		else if (roomCount == 2)
+		{
+			percent = .25;
+		}
+		return percent;
 	}
 }
