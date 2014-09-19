@@ -6,7 +6,7 @@ public class Rooms
 
 	public void RoomSetup()
 	{
-		while (RoomCount() < 14 || RoomCount() >18)
+		while (RoomCount() < 14 || RoomCount() > 18)
 		{
 			for (int index = 0; index < 7; index++)
 			{
@@ -16,10 +16,10 @@ public class Rooms
 				}
 			}
 			Setup[3][3] = true;
-			Setup[2][3] = RanBool(.75);
-			Setup[4][3] = RanBool(.75);
-			Setup[3][2] = RanBool(.75);
-			Setup[3][4] = RanBool(.75);
+			Setup[2][3] = RanBool(getSurrounding(2, 3));
+			Setup[4][3] = RanBool(getSurrounding(4, 3));
+			Setup[3][2] = RanBool(getSurrounding(3, 2));
+			Setup[3][4] = RanBool(getSurrounding(3, 4));
 			Setup[5][3] = RanBool(getSurrounding(5, 3));
 			Setup[1][3] = RanBool(getSurrounding(1, 3));
 			Setup[6][3] = RanBool(getSurrounding(6, 3));
@@ -64,9 +64,7 @@ public class Rooms
 			Setup[5][6] = RanBool(getSurrounding(5, 6));
 			Setup[6][5] = RanBool(getSurrounding(6, 5));
 			Setup[6][6] = RanBool(getSurrounding(6, 6));
-			// I know there's a much cleaner way of doing that.
-			System.out.println("          [" + RoomCount() + "]");
-			PrintSetup();
+			// I know there's probably a much cleaner way of doing that.
 		}
 		System.out.println("          [" + RoomCount() + "]");
 		PrintSetup();
