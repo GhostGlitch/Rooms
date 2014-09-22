@@ -2,71 +2,78 @@ package rooms.controller;
 
 public class Rooms
 {
-	public boolean[][] Setup = new boolean[7][7];
+	int GenMin = 0;
+	int GenMax = 15;
+	int GenCent = 7;
+	double RoomChance1 = .50;
+	double RoomChance2 = .25;
+	long MaxRooms = Math.round(Math.pow(GenMax - GenMin, 2) * .35);
+	long MinRooms = Math.round(Math.pow(GenMax - GenMin, 2) * .25);
+	public boolean[][] Setup = new boolean[63][63];
 
 	public void RoomSetup()
 	{
-		while (RoomCount() < 14 || RoomCount() > 18)
+		while (RoomCount() < MinRooms || RoomCount() > MaxRooms)
 		{
-			for (int index = 0; index < 7; index++)
+			for (int index = GenMin; index < GenMax; index++)
 			{
-				for (int index1 = 0; index1 < 7; index1++)
+				for (int index1 = GenMin; index1 < GenMax; index1++)
 				{
 					Setup[index][index1] = false;
 				}
 			}
-			Setup[3][3] = true;
-			for (int index = 3; index < 7; index++)
+			Setup[GenCent][GenCent] = true;
+			for (int index = GenCent; index < GenMax; index++)
 			{
-				for (int index1 = 3; index1 < 7; index1++)
+				for (int index1 = GenCent; index1 < GenMax; index1++)
 				{
-					if (!(index == 3 && index1 == 3))
+					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index, index1);
+						Setup[index1][index] = getSurrounding(index1, index);
 					}
 				}
 			}
-			for (int index = 3; index >= 0; index--)
+			for (int index = GenCent; index >= GenMin; index--)
 			{
-				for (int index1 = 3; index1 >= 0; index1--)
+				for (int index1 = GenCent; index1 >= GenMin; index1--)
 				{
-					if (!(index == 3 && index1 == 3))
+					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index, index1);
+						Setup[index1][index] = getSurrounding(index1, index);
 					}
 				}
 			}
-			for (int index = 2; index >= 0; index--)
+			for (int index = GenCent - 1; index >= GenMin; index--)
 			{
-				for (int index1 = 4; index1 < 7; index1++)
+				for (int index1 = GenCent + 1; index1 < GenMax; index1++)
 				{
-					if (!(index == 3 && index1 == 3))
+					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index, index1);
+						Setup[index1][index] = getSurrounding(index1, index);
 					}
 				}
 			}
-			for (int index = 4; index < 7; index++)
+			for (int index = GenCent + 1; index < GenMax; index++)
 			{
-				for (int index1 = 2; index1 >= 0; index1--)
+				for (int index1 = GenCent - 1; index1 >= GenMin; index1--)
 				{
-					if (!(index == 3 && index1 == 3))
+					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index, index1);
+						Setup[index1][index] = getSurrounding(index1, index);
 					}
 				}
 			}
 		}
-		System.out.println("          [" + RoomCount() + "]");
+		System.out.println("[" + RoomCount() + "]");
 		PrintSetup();
 	}
 
 	private int RoomCount()
 	{
 		int roomCount = 0;
-		for (int index = 0; index < 7; index++)
+		for (int index = 0; index < 63; index++)
 		{
-			for (int index1 = 0; index1 < 7; index1++)
+			for (int index1 = 0; index1 < 63; index1++)
 			{
 				if (Setup[index][index1])
 				{
@@ -79,15 +86,26 @@ public class Rooms
 
 	private void PrintSetup()
 	{
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■");
-		for (int index = 0; index < 7; index++)
+		for (int i = GenMin; i <= (GenMax * 3) + 1; i++)
+		{
+			System.out.print("■");
+		}
+		System.out.println();
+		for (int index = GenMin; index < GenMax; index++)
 		{
 			System.out.print("¦");
-			for (int index1 = 0; index1 < 7; index1++)
+			for (int index1 = GenMin; index1 < GenMax; index1++)
 			{
 				if (Setup[index][index1])
 				{
-					System.out.print("[■]");
+					if (index == GenCent && index1 == GenCent)
+					{
+						System.out.print("[O]");
+					}
+					else
+					{
+						System.out.print("[■]");
+					}
 				}
 				else
 				{
@@ -96,14 +114,17 @@ public class Rooms
 			}
 			System.out.println("¦");
 		}
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■");
+		for (int i = GenMin; i <= (GenMax * 3) + 1; i++)
+		{
+			System.out.print("■");
+		}
 	}
 
 	private boolean getSurrounding(int index, int index1)
 	{
 		int roomCount = 0;
 		double percent = 0;
-		if (index != 6)
+		if (index != 62)
 		{
 			if (Setup[index + 1][index1])
 			{
@@ -117,7 +138,7 @@ public class Rooms
 				roomCount = roomCount + 1;
 			}
 		}
-		if (index1 != 6)
+		if (index1 != 62)
 		{
 			if (Setup[index][index1 + 1])
 			{
@@ -133,11 +154,11 @@ public class Rooms
 		}
 		if (roomCount == 1)
 		{
-			percent = .50;
+			percent = RoomChance1;
 		}
 		else if (roomCount == 2)
 		{
-			percent = .25;
+			percent = RoomChance2;
 		}
 		return Math.random() < percent;
 	}
