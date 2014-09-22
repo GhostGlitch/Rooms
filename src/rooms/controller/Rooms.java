@@ -22,7 +22,7 @@ public class Rooms
 				{
 					if (!(index == 3 && index1 == 3))
 					{
-						Setup[index][index1] = RanBool(getSurrounding(index, index1));
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -32,7 +32,7 @@ public class Rooms
 				{
 					if (!(index == 3 && index1 == 3))
 					{
-						Setup[index][index1] = RanBool(getSurrounding(index, index1));
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -42,7 +42,7 @@ public class Rooms
 				{
 					if (!(index == 3 && index1 == 3))
 					{
-						Setup[index][index1] = RanBool(getSurrounding(index, index1));
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -52,18 +52,13 @@ public class Rooms
 				{
 					if (!(index == 3 && index1 == 3))
 					{
-						Setup[index][index1] = RanBool(getSurrounding(index, index1));
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
 		}
 		System.out.println("          [" + RoomCount() + "]");
 		PrintSetup();
-	}
-
-	private boolean RanBool(double Percent)
-	{
-		return Math.random() < Percent;
 	}
 
 	private int RoomCount()
@@ -104,7 +99,7 @@ public class Rooms
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■");
 	}
 
-	private double getSurrounding(int index, int index1)
+	private boolean getSurrounding(int index, int index1)
 	{
 		int roomCount = 0;
 		double percent = 0;
@@ -144,6 +139,6 @@ public class Rooms
 		{
 			percent = .25;
 		}
-		return percent;
+		return Math.random() < percent;
 	}
 }
