@@ -1,17 +1,17 @@
-package rooms.model;
+package model;
 
 public class Rooms
 {
-	int GenMin = 0;
-	int GenMax = 15;
-	int GenCent = 7;
+	private int GenMin = 0;
+	private int GenMax = 15;
+	private int GenCent = 7;
 	double RoomChance1 = .50;
 	double RoomChance2 = .25;
 	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .35);
 	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .25);
 	public boolean[][] Setup = new boolean[GenMax][GenMax];
 
-	public void RoomSetup()
+	public Rooms()
 	{
 		while (RoomCount() < MinRooms || RoomCount() > MaxRooms)
 		{
@@ -65,7 +65,6 @@ public class Rooms
 			}
 		}
 		System.out.println("[" + RoomCount() + "]");
-		PrintSetup();
 	}
 
 	private int RoomCount()
@@ -84,47 +83,11 @@ public class Rooms
 		return roomCount;
 	}
 
-	private void PrintSetup()
-	{
-		for (int i = GenMin; i <= (GenMax * 3) + 1; i++)
-		{
-			System.out.print("■");
-		}
-		System.out.println();
-		for (int index = GenMin; index < GenMax; index++)
-		{
-			System.out.print("¦");
-			for (int index1 = GenMin; index1 < GenMax; index1++)
-			{
-				if (Setup[index][index1])
-				{
-					if (index == GenCent && index1 == GenCent)
-					{
-						System.out.print("[O]");
-					}
-					else
-					{
-						System.out.print("[■]");
-					}
-				}
-				else
-				{
-					System.out.print(" ● ");
-				}
-			}
-			System.out.println("¦");
-		}
-		for (int i = GenMin; i <= (GenMax * 3) + 1; i++)
-		{
-			System.out.print("■");
-		}
-	}
-
 	private boolean getSurrounding(int index, int index1)
 	{
 		int roomCount = 0;
 		double percent = 0;
-		if (index != GenMax-1)
+		if (index != GenMax - 1)
 		{
 			if (Setup[index + 1][index1])
 			{
@@ -138,7 +101,7 @@ public class Rooms
 				roomCount = roomCount + 1;
 			}
 		}
-		if (index1 != GenMax-1)
+		if (index1 != GenMax - 1)
 		{
 			if (Setup[index][index1 + 1])
 			{
@@ -161,5 +124,45 @@ public class Rooms
 			percent = RoomChance2;
 		}
 		return Math.random() < percent;
+	}
+
+	public int getGenMin()
+	{
+		return GenMin;
+	}
+
+	public void setGenMin(int genMin)
+	{
+		GenMin = genMin;
+	}
+
+	public int getGenMax()
+	{
+		return GenMax;
+	}
+
+	public void setGenMax(int genMax)
+	{
+		GenMax = genMax;
+	}
+
+	public boolean[][] getSetup()
+	{
+		return Setup;
+	}
+
+	public void setSetup(boolean[][] setup)
+	{
+		Setup = setup;
+	}
+
+	public int getGenCent()
+	{
+		return GenCent;
+	}
+
+	public void setGenCent(int genCent)
+	{
+		GenCent = genCent;
 	}
 }
