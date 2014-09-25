@@ -1,7 +1,11 @@
 package view;
 
 import model.Rooms;
-
+/**
+ * 
+ * @author trob1932
+ *
+ */
 public class PrintBoard
 {
 	public void PrintSetup(Rooms var)

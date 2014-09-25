@@ -5,10 +5,14 @@ import view.PrintBoard;
 
 public class Run
 {
+	/**
+	 * Starts up the program Rooms.
+	 * @param args Java requirement.
+	 */
 	public static void main(String[] args)
 	{
-		Rooms var = new Rooms();
-		PrintBoard rooms = new PrintBoard();
-		rooms.PrintSetup(var);
+		Rooms board = new Rooms();
+		PrintBoard print = new PrintBoard();
+		print.PrintSetup(board);
 	}
 }
