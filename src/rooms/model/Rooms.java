@@ -1,4 +1,4 @@
-package rooms.controller;
+package rooms.model;
 
 public class Rooms
 {
@@ -9,7 +9,7 @@ public class Rooms
 	double RoomChance2 = .25;
 	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .35);
 	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .25);
-	public boolean[][] Setup = new boolean[63][63];
+	public boolean[][] Setup = new boolean[GenMax][GenMax];
 
 	public void RoomSetup()
 	{
@@ -124,28 +124,28 @@ public class Rooms
 	{
 		int roomCount = 0;
 		double percent = 0;
-		if (index != 62)
+		if (index != GenMax-1)
 		{
 			if (Setup[index + 1][index1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
-		if (index != 0)
+		if (index != GenMin)
 		{
 			if (Setup[index - 1][index1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
-		if (index1 != 62)
+		if (index1 != GenMax-1)
 		{
 			if (Setup[index][index1 + 1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
-		if (index1 != 0)
+		if (index1 != GenMin)
 		{
 			if (Setup[index][index1 - 1])
 			{
