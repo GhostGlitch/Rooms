@@ -7,8 +7,8 @@ public class Rooms
 	int GenCent = 7;
 	double RoomChance1 = .50;
 	double RoomChance2 = .25;
-	long MaxRooms = Math.round(Math.pow(GenMax - GenMin, 2) * .35);
-	long MinRooms = Math.round(Math.pow(GenMax - GenMin, 2) * .25);
+	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .35);
+	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .25);
 	public boolean[][] Setup = new boolean[63][63];
 
 	public void RoomSetup()
@@ -71,9 +71,9 @@ public class Rooms
 	private int RoomCount()
 	{
 		int roomCount = 0;
-		for (int index = 0; index < 63; index++)
+		for (int index = GenMin; index < GenMax; index++)
 		{
-			for (int index1 = 0; index1 < 63; index1++)
+			for (int index1 = GenMin; index1 < GenMax; index1++)
 			{
 				if (Setup[index][index1])
 				{
