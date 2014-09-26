@@ -1,28 +1,37 @@
 package view;
 
-import model.Rooms;
+import model.Setup;
+
 /**
+ * Outputs either the Setup or the Board to the Console
  * 
- * @author trob1932
- *
+ * @author GhostGlitch
+ * @see Setup
+ * @see Board
  */
 public class PrintBoard
 {
-	public void PrintSetup(Rooms var)
+	/**
+	 * Prints the new Setup
+	 * 
+	 * @param currentSetup
+	 *            a Rooms object to get the currentSetup
+	 */
+	public void PrintSetup(Setup currentSetup)
 	{
-		for (int i = var.getGenMin(); i <= (var.getGenMax() * 3) + 1; i++)
+		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 3) + 1; i++)
 		{
 			System.out.print("■");
 		}
 		System.out.println();
-		for (int index = var.getGenMin(); index < var.getGenMax(); index++)
+		for (int index = currentSetup.getGenMin(); index < currentSetup.getGenMax(); index++)
 		{
 			System.out.print("¦");
-			for (int index1 = var.getGenMin(); index1 < var.getGenMax(); index1++)
+			for (int index1 = currentSetup.getGenMin(); index1 < currentSetup.getGenMax(); index1++)
 			{
-				if (var.getSetup()[index][index1])
+				if (currentSetup.getSetup()[index][index1])
 				{
-					if (index == var.getGenCent() && index1 == var.getGenCent())
+					if (index == currentSetup.getGenCent() && index1 == currentSetup.getGenCent())
 					{
 						System.out.print("[O]");
 					}
@@ -38,10 +47,9 @@ public class PrintBoard
 			}
 			System.out.println("¦");
 		}
-		for (int i = var.getGenMin(); i <= (var.getGenMax() * 3) + 1; i++)
+		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 3) + 1; i++)
 		{
 			System.out.print("■");
 		}
 	}
-
 }

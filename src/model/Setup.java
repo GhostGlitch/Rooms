@@ -1,17 +1,51 @@
 package model;
 
-public class Rooms
+/**
+ * Generates where the rooms are
+ * 
+ * @author GhostGlitch
+ */
+public class Setup
 {
+	/**
+	 * The lowest value a room is allowed to generate at. Must be greater than
+	 * 0.
+	 */
 	private int GenMin = 0;
+	/**
+	 * The highest value a room is allowed to generate at. Must be greater than
+	 * GenMin.
+	 */
 	private int GenMax = 15;
+	/**
+	 * The X and Y coordinates of the start room.
+	 */
 	private int GenCent = 7;
+	/**
+	 * The Chance a room has to generate if it has 1 room adjacent to it.
+	 */
 	double RoomChance1 = .50;
+	/**
+	 * The Chance a room has to generate if it has 2 room adjacent to it.
+	 */
 	double RoomChance2 = .25;
+	/**
+	 * The most rooms allowed to generate.
+	 */
 	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .35);
+	/**
+	 * The least rooms allowed to generate.
+	 */
 	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .25);
-	public boolean[][] Setup = new boolean[GenMax][GenMax];
+	/**
+	 * Where rooms are and aren't.
+	 */
+	boolean[][] Setup = new boolean[GenMax][GenMax];
 
-	public Rooms()
+	/**
+	 * Generates a new setup of rooms.
+	 */
+	public Setup()
 	{
 		while (RoomCount() < MinRooms || RoomCount() > MaxRooms)
 		{
@@ -67,6 +101,11 @@ public class Rooms
 		System.out.println("[" + RoomCount() + "]");
 	}
 
+	/**
+	 * Counts how many rooms have been generated.
+	 * 
+	 * @return the # of rooms that have been generated.
+	 */
 	private int RoomCount()
 	{
 		int roomCount = 0;
@@ -83,6 +122,16 @@ public class Rooms
 		return roomCount;
 	}
 
+	/**
+	 * Tests how many rooms are directly adjacent to a given room and decides if
+	 * that room should be set.
+	 * 
+	 * @param index
+	 *            the first part of the room's coordinates.
+	 * @param index1
+	 *            the second part of the room's coordinates.
+	 * @return a boolean based on the adjacent rooms.
+	 */
 	private boolean getSurrounding(int index, int index1)
 	{
 		int roomCount = 0;
@@ -126,41 +175,85 @@ public class Rooms
 		return Math.random() < percent;
 	}
 
+	/**
+	 * Getter for GenMin
+	 * 
+	 * @return GenMin
+	 */
 	public int getGenMin()
 	{
 		return GenMin;
 	}
 
+	/**
+	 * Setter for GenMin
+	 * 
+	 * @param genMin
+	 *            the new GenMin value
+	 */
 	public void setGenMin(int genMin)
 	{
 		GenMin = genMin;
 	}
 
+	/**
+	 * Getter for GenMax
+	 * 
+	 * @return GenMax
+	 */
 	public int getGenMax()
 	{
 		return GenMax;
 	}
 
+	/**
+	 * Setter for GenMax
+	 * 
+	 * @param genMax
+	 *            the new value for GenMax
+	 */
 	public void setGenMax(int genMax)
 	{
 		GenMax = genMax;
 	}
 
+	/**
+	 * Getter for Setup
+	 * 
+	 * @return Setup
+	 */
 	public boolean[][] getSetup()
 	{
 		return Setup;
 	}
 
+	/**
+	 * Setter for Setup
+	 * 
+	 * @param setup
+	 *            new value for Setup
+	 */
 	public void setSetup(boolean[][] setup)
 	{
 		Setup = setup;
 	}
 
+	/**
+	 * Getter for GenCent
+	 * 
+	 * @return GenCent
+	 */
 	public int getGenCent()
 	{
 		return GenCent;
 	}
 
+	/**
+	 * Setter for GenCent
+	 * 
+	 * @param genCent
+	 *            the new value for GenCent
+	 */
 	public void setGenCent(int genCent)
 	{
 		GenCent = genCent;
