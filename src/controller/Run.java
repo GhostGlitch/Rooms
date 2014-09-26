@@ -19,6 +19,7 @@ public class Run
 	public static void main(String[] args)
 	{
 		Setup currentSetup = new Setup();
+		Board currentBoard = new Board(currentSetup);
 		PrintBoard print = new PrintBoard();
 		print.PrintSetup(currentSetup);
 	}
