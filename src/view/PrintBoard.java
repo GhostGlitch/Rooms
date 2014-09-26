@@ -19,11 +19,6 @@ public class PrintBoard
 	 */
 	public void PrintSetup(Setup currentSetup)
 	{
-		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 1.5) - 2; i++)
-		{
-			System.out.print(" ");
-		}
-		System.out.println("[" + currentSetup.RoomCount() + "]");
 		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 3) + 1; i++)
 		{
 			System.out.print("■");

@@ -98,6 +98,7 @@ public class Setup
 				}
 			}
 		}
+		System.out.println("[" + RoomCount() + "]");
 	}
 
 	/**
@@ -105,7 +106,7 @@ public class Setup
 	 * 
 	 * @return the # of rooms that have been generated.
 	 */
-	public int RoomCount()
+	private int RoomCount()
 	{
 		int roomCount = 0;
 		for (int index = GenMin; index < GenMax; index++)
@@ -256,4 +257,5 @@ public class Setup
 	public void setGenCent(int genCent)
 	{
 		GenCent = genCent;
-	}}
+	}
+}
