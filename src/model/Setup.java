@@ -63,7 +63,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -73,7 +73,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -83,7 +83,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index][index1] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
@@ -93,7 +93,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index1][index] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index, index1);
 					}
 				}
 			}
