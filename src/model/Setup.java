@@ -63,7 +63,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index1][index] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index1, index);
 					}
 				}
 			}
@@ -73,7 +73,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index1][index] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index1, index);
 					}
 				}
 			}
@@ -83,7 +83,7 @@ public class Setup
 				{
 					if (!(index == GenCent && index1 == GenCent))
 					{
-						Setup[index1][index] = getSurrounding(index1, index);
+						Setup[index][index1] = getSurrounding(index1, index);
 					}
 				}
 			}
@@ -227,7 +227,7 @@ public class Setup
 	}
 
 	/**
-	 * Setter for Setup
+	 * Setter for array Setup
 	 * 
 	 * @param setup
 	 *            new value for Setup
