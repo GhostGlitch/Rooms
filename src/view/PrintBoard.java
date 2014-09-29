@@ -14,29 +14,29 @@ public class PrintBoard
 	/**
 	 * Prints the new Setup
 	 * 
-	 * @param currentSetup
-	 *            a Rooms object to get the currentSetup
+	 * @param setup
+	 *            a Rooms object to get the setup
 	 */
-	public void PrintSetup(Setup currentSetup)
+	public void PrintSetup(Setup setup)
 	{
-		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 1.5) - 2; i++)
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
 			System.out.print(" ");
 		}
-		System.out.println("[" + currentSetup.RoomCount() + "]");
-		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 3) + 1; i++)
+		System.out.println("[" + setup.RoomCount() + "]");
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
 		{
 			System.out.print("■");
 		}
 		System.out.println();
-		for (int index = currentSetup.getGenMin(); index < currentSetup.getGenMax(); index++)
+		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
 		{
 			System.out.print("¦");
-			for (int index1 = currentSetup.getGenMin(); index1 < currentSetup.getGenMax(); index1++)
+			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
-				if (currentSetup.getSetup()[index][index1])
+				if (setup.get()[index][index1])
 				{
-					if (index == currentSetup.getGenCent() && index1 == currentSetup.getGenCent())
+					if (index == setup.getGenCent() && index1 == setup.getGenCent())
 					{
 						System.out.print("[O]");
 					}
@@ -52,7 +52,7 @@ public class PrintBoard
 			}
 			System.out.println("¦");
 		}
-		for (int i = currentSetup.getGenMin(); i <= (currentSetup.getGenMax() * 3) + 1; i++)
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
 		{
 			System.out.print("■");
 		}

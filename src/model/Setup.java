@@ -221,7 +221,7 @@ public class Setup
 	 * 
 	 * @return Setup
 	 */
-	public boolean[][] getSetup()
+	public boolean[][] get()
 	{
 		return Setup;
 	}
