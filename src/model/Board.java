@@ -1,19 +1,19 @@
 package model;
 
 import java.util.Random;
-import model.Setup;
 
 public class Board
 {
+
 	public Board(Setup currentSetup)
 	{
-		
+		RanInt(currentSetup);
 	}
-	RanInt()
-	public int RanInt(int min, int max)
+
+	private int RanInt(Setup currentSetup)
 	{
 		Random rand = new Random();
-		int ranNum = rand.nextInt((max - min) + 1) + min;
+		int ranNum = rand.nextInt((currentSetup.getGenMax() - currentSetup.getGenMin()) + 1) + currentSetup.getGenMin();
 		return ranNum;
 	}
 }
