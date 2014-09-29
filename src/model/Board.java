@@ -11,60 +11,83 @@ public class Board
 
 	public Board(Setup setup)
 	{
-		boolean[][] Board = new boolean[setup.getGenMax()][setup.getGenMax()];
+		int[][] Board = new int[setup.getGenMax()][setup.getGenMax()];
 		while (!isEdge)
 		{
 			index = RanInt(setup);
 			index1 = RanInt(setup);
 			EdgeTest(setup);
+			System.out.println(index + " " + index1);
+			System.out.println(isEdge);
 		}
 	}
 
 	private int RanInt(Setup setup)
 	{
-		return rand.nextInt((setup.getGenMax() - setup.getGenMin()) + 1) + setup.getGenMin();
+		return rand.nextInt((setup.getGenMax() - setup.getGenMin())) + setup.getGenMin();
 	}
 
 	private boolean EdgeTest(Setup setup)
 	{
-		int roomCount = 0;
-		if (index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1)
+		if (setup.get()[index][index1])
 		{
-			if ((index != setup.getGenMax() - 1 && !setup.get()[index + 1][index1]) && !setup.get()[index][index1 + 1])
+			if (index != setup.getGenMin() && index1 != setup.getGenMin()
+					&& (index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
+					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
+					&& setup.get()[index - 1][index1 - 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 - 1])
 			{
 				isEdge = true;
-				return isEdge;
 			}
-		}
-		else if (index != setup.getGenMin() && index1 != setup.getGenMin())
-		{
-			if (!setup.get()[index - 1][index1] && !setup.get()[index][index1 - 1])
+			else if (index != setup.getGenMin() && index1 != setup.getGenMax() - 1
+					&& (index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
+					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1])
+					&& setup.get()[index - 1][index1 + 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 + 1])
 			{
-
+				isEdge = true;
 			}
-		}
-		else if (index1 != setup.getGenMax() - 1)
-		{
-			if (setup.get()[index][index1 + 1])
+			else if (index != setup.getGenMax() - 1 && index1 != setup.getGenMin()
+					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
+					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
+					&& setup.get()[index + 1][index1 - 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 - 1])
 			{
-
+				isEdge = true;
 			}
-		}
-		else if (index1 != setup.getGenMin())
-		{
-			if (setup.get()[index][index1 - 1])
+			else if (index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1
+					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
+					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1])
+					&& setup.get()[index + 1][index1 + 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 + 1])
 			{
-
+				isEdge = true;
+			}
+			else if ((index != setup.getGenMax() - 1 && setup.get()[index + 1][index1])
+					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
+					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
+					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
+			{
+				isEdge = true;
+			}
+			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
+					&& (index != setup.getGenMin() && setup.get()[index - 1][index1])
+					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
+					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
+			{
+				isEdge = true;
+			}
+			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
+					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
+					&& (index1 != setup.getGenMax() - 1 && setup.get()[index][index1 + 1])
+					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
+			{
+				isEdge = true;
+			}
+			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
+					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
+					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
+					&& (index1 != setup.getGenMin() && setup.get()[index][index1 - 1]))
+			{
+				isEdge = true;
 			}
 		}
-		if (roomCount == 1)
-		{
-			percent = .5;
-		}
-		else if (roomCount == 2)
-		{
-			percent = .25;
-		}
-		return Math.random() < percent;
+		return isEdge;
 	}
 }
