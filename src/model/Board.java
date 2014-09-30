@@ -4,14 +4,15 @@ import java.util.Random;
 
 public class Board
 {
-	Random rand = new Random();
+
 	int index;
 	int index1;
 	boolean isEdge = false;
+	int[][] Board;
 
 	public Board(Setup setup)
 	{
-		int[][] Board = new int[setup.getGenMax()][setup.getGenMax()];
+		Board = new int[setup.getGenMax()][setup.getGenMax()];
 		while (!isEdge)
 		{
 			index = RanInt(setup);
@@ -24,6 +25,7 @@ public class Board
 
 	private int RanInt(Setup setup)
 	{
+		Random rand = new Random();
 		return rand.nextInt((setup.getGenMax() - setup.getGenMin())) + setup.getGenMin();
 	}
 
