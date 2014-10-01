@@ -59,6 +59,47 @@ public class Print
 		}
 		System.out.println();
 	}
+	public void PrintSetupClear(Setup setup)
+	{
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
+		{
+			System.out.print(" ");
+		}
+		System.out.println("[" + setup.RoomCount() + "]");
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		{
+			System.out.print("■");
+		}
+		System.out.println();
+		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
+		{
+			System.out.print("¦");
+			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
+			{
+				if (setup.get()[index][index1])
+				{
+					if (index == setup.getGenCent() && index1 == setup.getGenCent())
+					{
+						System.out.print("[O]");
+					}
+					else
+					{
+						System.out.print("[■]");
+					}
+				}
+				else
+				{
+					System.out.print("   ");
+				}
+			}
+			System.out.println("¦");
+		}
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		{
+			System.out.print("■");
+		}
+		System.out.println();
+	}
 	public void PrintBoard(Setup setup, Board board)
 	{
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
@@ -76,7 +117,7 @@ public class Print
 			System.out.print("¦");
 			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
-				if (board.get()[index][index1] == 1)
+				if (board.get()[index][index1] == 0)
 				{
 					if (index == setup.getGenCent() && index1 == setup.getGenCent())
 					{
@@ -87,9 +128,17 @@ public class Print
 						System.out.print("[■]");
 					}
 				}
+				else if (board.get()[index][index1] == 1)
+				{
+					System.out.print("[1]");
+				}
 				else if (board.get()[index][index1] == 2)
 				{
-					System.out.print("[●]");
+					System.out.print("[2]");
+				}
+				else if (board.get()[index][index1] == 3)
+				{
+					System.out.print("[3]");
 				}
 				else
 				{

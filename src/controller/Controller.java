@@ -7,7 +7,8 @@ import view.Print;
 /**
  * Starts up the program Rooms.
  * 
- * @author GhostGlitch
+ * @author GhostGlitch and Narpas-Sword
+ * @version 0.6
  */
 public class Controller
 {
@@ -23,6 +24,7 @@ public class Controller
 		Board board = new Board(setup);
 		Print print = new Print();
 		print.PrintSetup(setup);
+		print.PrintSetupClear(setup);
 		print.PrintBoard(setup, board);
 	}
 	
@@ -84,6 +86,34 @@ public class Controller
 					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
 					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
 					&& (index1 != setup.getGenMin() && setup.get()[index][index1 - 1]))
+			{
+				isEdge = true;
+			}
+			else if (index != setup.getGenMin() && index1 != setup.getGenMin() && index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1 
+					&& !setup.get()[index + 1][index1]
+					&& setup.get()[index - 1][index1 - 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 - 1] 
+					&& setup.get()[index - 1][index1 + 1] && setup.get()[index][index1 + 1])
+			{
+				isEdge = true;
+			}
+			else if (index != setup.getGenMin() && index1 != setup.getGenMin() && index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1 
+					&& !setup.get()[index - 1][index1]
+					&& setup.get()[index + 1][index1 + 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 + 1] 
+					&& setup.get()[index + 1][index1 - 1] && setup.get()[index][index1 - 1])
+			{
+				isEdge = true;
+			}
+			else if (index != setup.getGenMin() && index1 != setup.getGenMin() && index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1 
+					&& !setup.get()[index][index1 - 1]
+					&& setup.get()[index + 1][index1 + 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 + 1] 
+					&& setup.get()[index - 1][index1 + 1] && setup.get()[index - 1][index1])
+			{
+				isEdge = true;
+			}
+			else if (index != setup.getGenMin() && index1 != setup.getGenMin() && index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1 
+					&& !setup.get()[index][index1 + 1]
+					&& setup.get()[index - 1][index1 - 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 - 1] 
+					&& setup.get()[index + 1][index1 - 1] && setup.get()[index + 1][index1])
 			{
 				isEdge = true;
 			}
