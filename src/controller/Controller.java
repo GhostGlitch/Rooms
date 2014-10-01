@@ -29,7 +29,7 @@ public class Controller
 	public boolean EdgeTest(Setup setup,int index,int index1)
 	{
 		boolean isEdge = false;
-		if (setup.get()[index][index1])
+		if (setup.get()[index][index1] && !(index == setup.getGenCent() && index1 == setup.getGenCent()))
 		{
 			if (index != setup.getGenMin() && index1 != setup.getGenMin()
 					&& (index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])

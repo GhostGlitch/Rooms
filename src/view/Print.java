@@ -93,7 +93,7 @@ public class Print
 				}
 				else
 				{
-					System.out.print(" ● ");
+					System.out.print("   ");
 				}
 			}
 			System.out.println("¦");

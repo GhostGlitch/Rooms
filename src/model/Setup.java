@@ -5,7 +5,7 @@ import controller.Controller;
 /**
  * Generates where the rooms are
  * 
- * @author GhostGlitch
+ * @authors GhostGlitch & Narpa-Sword
  */
 public class Setup
 {
@@ -40,11 +40,11 @@ public class Setup
 	 * The Chance a room has to generate if it has 4 room adjacent to it.
 	 */
 	double RoomChance4 = 0;
-	double EraseChance = .01;
+	double EraseChance = 1;
 	/**
 	 * The most rooms allowed to generate.
 	 */
-	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * 1);
+	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .251);
 	/**
 	 * The least rooms allowed to generate.
 	 */
