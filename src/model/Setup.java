@@ -41,16 +41,15 @@ public class Setup
 	/**
 	 * The Chance a room has to generate if it has 4 room adjacent to it.
 	 */
-	double RoomChance4 = 0;
-	double EraseChance = 1;
+	double RoomChance4 = .00005;
 	/**
 	 * The most rooms allowed to generate.
 	 */
-	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .251);
+	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .50);
 	/**
 	 * The least rooms allowed to generate.
 	 */
-	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .25);
+	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .30);
 	/**
 	 * Where rooms are and aren't.
 	 */
@@ -99,11 +98,8 @@ public class Setup
 				int index1 = RanInt();
 				if (controller.EdgeTest(this, index, index1))
 				{
-					if (Math.random() < EraseChance)
-					{
 						Dummy[index][index1] = false;
 						Setup[index][index1] = false;
-					}
 				}
 			}
 		}

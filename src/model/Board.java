@@ -11,6 +11,7 @@ public class Board
 	int index1;
 	boolean isEdge = false;
 	int[][] Board;
+	double roomsPerTreasure = 10;
 
 	public Board(Setup setup)
 	{
@@ -19,20 +20,23 @@ public class Board
 		{
 			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
-					Board[index][index1] = -1;
-			}
-		}
-		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
-		{
-			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
-			{
 				if (setup.get()[index][index1])
 				{
 					Board[index][index1] = 0;
 				}
+				else
+				{
+					Board[index][index1] = -1;
+				}
 			}
 		}
-		for (int treasure = 0; treasure <= setup.RoomCount(); treasure = treasure + 25)
+		/*
+		 * while (!isEdge) { index = RanInt(setup); index1 = RanInt(setup);
+		 * EdgeTest(setup); System.out.println(index + " " + index1);
+		 * System.out.println(isEdge); }
+		 */
+		isEdge = false;
+		if (roomsPerTreasure > setup.RoomCount())
 		{
 			while (!isEdge)
 			{
@@ -44,6 +48,23 @@ public class Board
 			}
 			isEdge = false;
 			Board[index][index1] = Board[index][index1] + 1;
+		}
+
+		else
+		{
+			for (int treasure = 0; treasure != (int) (Math.floor(setup.RoomCount() / roomsPerTreasure)); treasure++)
+			{
+				while (!isEdge)
+				{
+					index = RanInt(setup);
+					index1 = RanInt(setup);
+					EdgeTest(setup);
+					System.out.println(index + " " + index1);
+					System.out.println(isEdge);
+				}
+				isEdge = false;
+				Board[index][index1] = Board[index][index1] + 1;
+			}
 		}
 	}
 
@@ -57,6 +78,7 @@ public class Board
 	{
 		return Board;
 	}
+
 	boolean EdgeTest(Setup setup)
 	{
 		isEdge = false;

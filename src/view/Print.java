@@ -102,54 +102,72 @@ public class Print
 	}
 	public void PrintBoard(Setup setup, Board board)
 	{
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
+		System.out.println();
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 2.5) - 2; i++)
 		{
 			System.out.print(" ");
 		}
 		System.out.println("[" + setup.RoomCount() + "]");
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 6) + 1; i++)
 		{
 			System.out.print("■");
 		}
 		System.out.println();
 		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
 		{
-			System.out.print("¦");
+			System.out.print("|");
 			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
 				if (board.get()[index][index1] == 0)
 				{
 					if (index == setup.getGenCent() && index1 == setup.getGenCent())
 					{
-						System.out.print("[O]");
+						System.out.print("|■  ■|");
 					}
 					else
 					{
-						System.out.print("[■]");
+						System.out.print("|■■■■|");
 					}
 				}
-				else if (board.get()[index][index1] == 1)
+				else if (board.get()[index][index1] > 0 && board.get()[index][index1] < 10)
 				{
-					System.out.print("[1]");
-				}
-				else if (board.get()[index][index1] == 2)
-				{
-					System.out.print("[2]");
-				}
-				else if (board.get()[index][index1] == 3)
-				{
-					System.out.print("[3]");
+					System.out.print("|T" + board.get()[index][index1] + "■■|");
 				}
 				else
 				{
-					System.out.print("   ");
+					System.out.print("      ");
 				}
 			}
-			System.out.println("¦");
-		}
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
-		{
-			System.out.print("■");
+			System.out.println("|");
+			System.out.print("|");
+			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
+			{
+				if (board.get()[index][index1] == 0)
+				{
+					if (index == setup.getGenCent() && index1 == setup.getGenCent())
+					{
+						System.out.print("|■■■■|");
+					}
+					else
+					{
+						System.out.print("|■■■■|");
+					}
+				}
+				else if (board.get()[index][index1] > 0 && board.get()[index][index1] < 10)
+				{
+					System.out.print("|■■■■|");
+				}
+				else
+				{
+					System.out.print("      ");
+				}
+			}
+			System.out.println("|");
+			for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 6) + 1; i++)
+			{
+				System.out.print("■");
+			}
+			System.out.println();
 		}
 	}
 }
