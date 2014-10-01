@@ -1,11 +1,13 @@
 package model;
 
+import java.util.Random;
+
 import controller.Controller;
 
 /**
  * Generates where the rooms are
  * 
- * @authors GhostGlitch & Narpa-Sword
+ * @authors GhostGlitch & Narpas-Sword
  */
 public class Setup
 {
@@ -93,24 +95,14 @@ public class Setup
 			}
 			while (RoomCount() > MaxRooms)
 			{
-				for (int index = GenMin; index < GenMax; index++)
+				int index = RanInt();
+				int index1 = RanInt();
+				if (controller.EdgeTest(this, index, index1))
 				{
-					for (int index1 = GenMin; index1 < GenMax; index1++)
+					if (Math.random() < EraseChance)
 					{
-						if (controller.EdgeTest(this, index, index1))
-						{
-							if (Math.random() < EraseChance)
-							{
-								Dummy[index][index1] = false;
-							}
-						}
-					}
-				}
-				for (int index = GenMin; index < GenMax; index++)
-				{
-					for (int index1 = GenMin; index1 < GenMax; index1++)
-					{
-						Setup[index][index1] = Dummy[index][index1];
+						Dummy[index][index1] = false;
+						Setup[index][index1] = false;
 					}
 				}
 			}
@@ -203,47 +195,10 @@ public class Setup
 		return Math.random() < percent;
 	}
 
-	/**
-	 * Returns the number of rooms surrounding the given room
-	 * 
-	 * @param index
-	 *            the first part of the room's coordinates.
-	 * @param index1
-	 *            the second part of the room's coordinates.
-	 * @return Number of surrounding rooms
-	 */
-	private int getSurroundingNum(int index, int index1)
+	private int RanInt()
 	{
-		int roomCount = 0;
-		if (index < GenMax - 1)
-		{
-			if (Setup[index + 1][index1])
-			{
-				roomCount = roomCount + 1;
-			}
-		}
-		if (index > GenMin)
-		{
-			if (Setup[index - 1][index1])
-			{
-				roomCount = roomCount + 1;
-			}
-		}
-		if (index1 < GenMax - 1)
-		{
-			if (Setup[index][index1 + 1])
-			{
-				roomCount = roomCount + 1;
-			}
-		}
-		if (index1 > GenMin)
-		{
-			if (Setup[index][index1 - 1])
-			{
-				roomCount = roomCount + 1;
-			}
-		}
-		return roomCount;
+		Random rand = new Random();
+		return rand.nextInt((GenMax - GenMin)) + GenMin;
 	}
 
 	/**
