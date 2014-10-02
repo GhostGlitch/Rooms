@@ -12,6 +12,7 @@ public class Board
 	boolean isEdge = false;
 	int[][] Board;
 	double roomsPerTreasure = 10;
+	double roomsPerBoss = 20;
 
 	public Board(Setup setup)
 	{
@@ -43,8 +44,6 @@ public class Board
 				index = RanInt(setup);
 				index1 = RanInt(setup);
 				EdgeTest(setup);
-				System.out.println(index + " " + index1);
-				System.out.println(isEdge);
 			}
 			isEdge = false;
 			Board[index][index1] = Board[index][index1] + 1;
@@ -59,11 +58,40 @@ public class Board
 					index = RanInt(setup);
 					index1 = RanInt(setup);
 					EdgeTest(setup);
-					System.out.println(index + " " + index1);
-					System.out.println(isEdge);
 				}
 				isEdge = false;
 				Board[index][index1] = Board[index][index1] + 1;
+			}
+		}
+		int thing = 0;
+		if (roomsPerBoss > setup.RoomCount())
+		{
+			while (!isEdge)
+			{
+				index = RanInt(setup);
+				index1 = RanInt(setup);
+				EdgeTest(setup);
+			}
+			isEdge = false;
+			Board[index][index1] = Board[index][index1] + 10;
+			thing++;
+			System.out.println(thing);;
+		}
+
+		else
+		{
+			for (int boss = 0; boss != (int) (Math.floor(setup.RoomCount() / roomsPerBoss)); boss++)
+			{
+				while (!isEdge)
+				{
+					index = RanInt(setup);
+					index1 = RanInt(setup);
+					EdgeTest(setup);
+				}
+				isEdge = false;
+				Board[index][index1] = Board[index][index1] + 10;
+				thing++;
+				System.out.println(thing);;
 			}
 		}
 	}

@@ -24,7 +24,8 @@ public class Controller
 		Board board = new Board(setup);
 		Print print = new Print();
 		print.PrintSetup(setup);
-		print.PrintSetupClear(setup);
+		print.PrintSetupClean(setup);
+		print.PrintBoardSimple(setup, board);
 		print.PrintBoard(setup, board);
 	}
 	

@@ -21,11 +21,11 @@ public class Setup
 	 * The highest value a room is allowed to generate at. Must be greater than
 	 * GenMin.
 	 */
-	private int GenMax = 15;
+	private int GenMax = 9;
 	/**
 	 * The X and Y coordinates of the start room.
 	 */
-	private int GenCent = 7;
+	private int GenCent = 4;
 	/**
 	 * The Chance a room has to generate if it has 1 room adjacent to it.
 	 */
@@ -42,14 +42,17 @@ public class Setup
 	 * The Chance a room has to generate if it has 4 room adjacent to it.
 	 */
 	double RoomChance4 = .00005;
-	/**
-	 * The most rooms allowed to generate.
-	 */
-	int MaxRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .50);
+	double MinRmPercent = 0.25;
+	double MaxRmPercent = 0.40;
+	double ranRoomAmount = RanDouble(MinRmPercent, MaxRmPercent);
 	/**
 	 * The least rooms allowed to generate.
 	 */
-	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * .30);
+	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * ranRoomAmount);
+	/**
+	 * The most rooms allowed to generate.
+	 */
+	int MaxRooms = MinRooms + 1;
 	/**
 	 * Where rooms are and aren't.
 	 */
@@ -64,6 +67,11 @@ public class Setup
 	/**
 	 * Generates a new setup of rooms.
 	 */
+	private double RanDouble(double Min, double Max)
+	{
+		Random rand = new Random();
+		return Min + (Max - Min) * rand.nextDouble();
+	}
 	public Setup()
 	{
 		Setup[GenCent][GenCent] = true;
