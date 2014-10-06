@@ -1,5 +1,10 @@
 package view;
 
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import model.Board;
 import model.Setup;
 
@@ -60,7 +65,7 @@ public class Print
 		System.out.println();
 	}
 
-	public void PrintSetupClean(Setup setup)
+	public void PrintSetupSimple(Setup setup)
 	{
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
@@ -240,5 +245,52 @@ public class Print
 			}
 			System.out.println();
 		}
+	}
+	public void PrintBoardPopup(Setup setup, Board board)
+	{
+		String Map = "<html>";
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
+		{
+			Map = Map + "  ";
+		}
+		Map = Map + "[" + setup.RoomCount() + "]<br>";
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		{
+			Map = Map + "■";
+		}
+		Map = Map + "<br>";
+		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
+		{
+			Map = Map + "¦";
+			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
+			{
+				if (setup.get()[index][index1])
+				{
+					if (index == setup.getGenCent() && index1 == setup.getGenCent())
+					{
+						Map = Map + "[O]";
+					}
+					else
+					{
+						Map = Map + "[■]";
+					}
+				}
+				else
+				{
+					Map = Map + "      ";
+				}
+			}
+			Map = Map + "¦<br>";
+		}
+		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		{
+			Map = Map + "■";
+		}
+		Map = Map + "<br>";
+		Map = Map + "<html>";
+		System.out.print(Map);
+		JLabel Label = new JLabel(Map);
+	    Label.setFont(new Font("Courier New", Font.PLAIN, 12));
+		JOptionPane.showMessageDialog(null, Label);
 	}
 }

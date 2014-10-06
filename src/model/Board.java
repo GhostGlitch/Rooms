@@ -51,7 +51,7 @@ public class Board
 
 		else
 		{
-			for (int treasure = 0; treasure != (int) (Math.floor(setup.RoomCount() / roomsPerTreasure)); treasure++)
+			for (int treasure = 0; treasure != (Math.floor(setup.RoomCount() / roomsPerTreasure)); treasure++)
 			{
 				while (!isEdge)
 				{
@@ -63,7 +63,6 @@ public class Board
 				Board[index][index1] = Board[index][index1] + 1;
 			}
 		}
-		int thing = 0;
 		if (roomsPerBoss > setup.RoomCount())
 		{
 			while (!isEdge)
@@ -74,13 +73,11 @@ public class Board
 			}
 			isEdge = false;
 			Board[index][index1] = Board[index][index1] + 10;
-			thing++;
-			System.out.println(thing);;
 		}
 
 		else
 		{
-			for (int boss = 0; boss != (int) (Math.floor(setup.RoomCount() / roomsPerBoss)); boss++)
+			for (int boss = 0; boss != (Math.floor(setup.RoomCount() / roomsPerBoss)); boss++)
 			{
 				while (!isEdge)
 				{
@@ -90,8 +87,6 @@ public class Board
 				}
 				isEdge = false;
 				Board[index][index1] = Board[index][index1] + 10;
-				thing++;
-				System.out.println(thing);;
 			}
 		}
 	}

@@ -24,9 +24,10 @@ public class Controller
 		Board board = new Board(setup);
 		Print print = new Print();
 		print.PrintSetup(setup);
-		print.PrintSetupClean(setup);
+		print.PrintSetupSimple(setup);
 		print.PrintBoardSimple(setup, board);
 		print.PrintBoard(setup, board);
+		print.PrintBoardPopup(setup, board);
 	}
 	
 	public boolean EdgeTest(Setup setup,int index,int index1)
