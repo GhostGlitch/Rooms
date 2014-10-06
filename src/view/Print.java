@@ -290,7 +290,8 @@ public class Print
 		Map = Map + "<html>";
 		System.out.print(Map);
 		JLabel Label = new JLabel(Map);
-	    Label.setFont(new Font("Courier New", Font.PLAIN, 12));
+		Label.setFont(new Font("Monospace", Font.PLAIN, 50));
+		JOptionPane.showMessageDialog(null, Map);
 		JOptionPane.showMessageDialog(null, Label);
 	}
 }
