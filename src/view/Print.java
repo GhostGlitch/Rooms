@@ -194,11 +194,11 @@ public class Print
 				}
 				else if (board.get()[index][index1] % 10 == 0)
 				{
-					System.out.print("|■■■B" + board.get()[index][index1]/10 + "|");
+					System.out.print("|■■■B" + board.get()[index][index1] / 10 + "|");
 				}
 				else if (board.get()[index][index1] > 10)
 				{
-					System.out.print("|T" + board.get()[index][index1]% 10 + " " + "B" + board.get()[index][index1]/10 + "|");
+					System.out.print("|T" + board.get()[index][index1] % 10 + " " + "B" + board.get()[index][index1] / 10 + "|");
 				}
 			}
 			System.out.println("|");
@@ -216,13 +216,21 @@ public class Print
 						System.out.print("|■■■■■|");
 					}
 				}
-				else if (board.get()[index][index1] > 0 && board.get()[index][index1] < 10)
+				else if (board.get()[index][index1] == -1)
+				{
+					System.out.print("       ");
+				}
+				else if (board.get()[index][index1] < 10)
 				{
 					System.out.print("|■■■■■|");
 				}
-				else
+				else if (board.get()[index][index1] % 10 == 0)
 				{
-					System.out.print("       ");
+					System.out.print("|■■■■■|");
+				}
+				else if (board.get()[index][index1] > 10)
+				{
+					System.out.print("|■■■■■|");
 				}
 			}
 			System.out.println("|");
