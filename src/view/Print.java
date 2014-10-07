@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -11,7 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Board;
@@ -259,81 +257,99 @@ public class Print
 	public void PrintBoardPopup(Setup setup, Board board)
 	{
 		String Map = "<html>";
+		GridLayout gridTest = new GridLayout(0, 11);
+		JPanel gridPanel = new JPanel();
+		gridPanel.setLayout(gridTest);
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
 			Map = Map + "  ";
 		}
 		Map = Map + "[" + setup.RoomCount() + "]<br>";
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		for (int i = setup.getGenMin(); i <= setup.getGenMax() + 1; i++)
 		{
-			Map = Map + "■";
+			if (i == setup.getGenMin())
+			{
+				gridPanel.add(BigImgLbl("Map/TempTopLeft.png"));
+			}
+			else if (i == setup.getGenMax() + 1)
+			{
+				gridPanel.add(BigImgLbl("Map/TempTopRight.png"));
+			}
+			else
+			{
+				gridPanel.add(BigImgLbl("Map/TempHorizontal.png"));
+			}
 		}
-		Map = Map + "<br>";
 		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
 		{
-			Map = Map + "¦";
+			gridPanel.add(BigImgLbl("Map/TempVertical.png"));
 			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
 				if (setup.get()[index][index1])
 				{
 					if (index == setup.getGenCent() && index1 == setup.getGenCent())
 					{
-						Map = Map + "[O]";
+						gridPanel.add(BigImgLbl("Map/TempRoom.png"));
 					}
 					else
 					{
-						Map = Map + "[■]";
+						gridPanel.add(BigImgLbl("Map/TempRoom.png"));
 					}
 				}
 				else
 				{
-					Map = Map + "      ";
+					gridPanel.add(BigImgLbl("Map/TempEmpty.png"));
 				}
 			}
-			Map = Map + "¦<br>";
+			gridPanel.add(BigImgLbl("Map/TempVertical.png"));
 		}
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3) + 1; i++)
+		for (int i = setup.getGenMin(); i <= setup.getGenMax() + 1; i++)
 		{
-			Map = Map + "■";
+			if (i == setup.getGenMin())
+			{
+				gridPanel.add(BigImgLbl("Map/TempBottomLeft.png"));
+			}
+			else if (i == setup.getGenMax() + 1)
+			{
+				gridPanel.add(BigImgLbl("Map/TempBottomRight.png"));
+			}
+			else
+			{
+				gridPanel.add(BigImgLbl("Map/TempHorizontal.png"));
+			}
 		}
 		Map = Map + "<br>";
 		Map = Map + "<html>";
 		System.out.print(Map);
-		JLabel Label = new JLabel(Map);
-		Label.setFont(new Font("Monospace", Font.PLAIN, 50));
-		//JOptionPane.showMessageDialog(null, Map);
-		//JOptionPane.showMessageDialog(null, Label);
-		GridLayout gridTest = new GridLayout();
-		BufferedImage img = null;
-		try {
-		    img = ImageIO.read(new File("images/map/TempRoom.png"));
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		Image rimg = img.getScaledInstance(img.getWidth()*10, img.getWidth()*10, Image.SCALE_SMOOTH);
-		ImageIcon icon = new ImageIcon(rimg);
-		JLabel label1 = new JLabel(icon);
-		JPanel gridPanel = new JPanel();
-		gridPanel.setLayout(gridTest);
-		gridPanel.add(label1);
 		JFrame frame = new JFrame("map");
 		frame.getContentPane().add(gridPanel);
 		frame.pack();
 		frame.setVisible(true);
-		
+
 	}
-	ImageIcon createImageIcon(String path, String description)
+
+	Image Resize(BufferedImage img, int amount)
 	{
-		java.net.URL imgURL = getClass().getResource(path);
-		if (imgURL != null)
+		Image resized = img.getScaledInstance(img.getWidth() * amount, img.getWidth() * amount, Image.SCALE_SMOOTH);
+		return resized;
+	}
+
+	BufferedImage LoadImage(String location)
+	{
+		BufferedImage img = null;
+		try
 		{
-			return new ImageIcon(imgURL, description);
+			img = ImageIO.read(new File("images/" + location));
 		}
-		else
+		catch (IOException e)
 		{
-			System.out.println("");
-			System.err.println("Couldn't find file: " + path);
-			return null;
+			e.printStackTrace();
 		}
+		return img;
+	}
+
+	JLabel BigImgLbl(String location)
+	{
+		return new JLabel(new ImageIcon(Resize(LoadImage(location), 10)));
 	}
 }
