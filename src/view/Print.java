@@ -1,9 +1,18 @@
 package view;
 
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import model.Board;
 import model.Setup;
@@ -246,6 +255,7 @@ public class Print
 			System.out.println();
 		}
 	}
+
 	public void PrintBoardPopup(Setup setup, Board board)
 	{
 		String Map = "<html>";
@@ -291,7 +301,39 @@ public class Print
 		System.out.print(Map);
 		JLabel Label = new JLabel(Map);
 		Label.setFont(new Font("Monospace", Font.PLAIN, 50));
-		JOptionPane.showMessageDialog(null, Map);
-		JOptionPane.showMessageDialog(null, Label);
+		//JOptionPane.showMessageDialog(null, Map);
+		//JOptionPane.showMessageDialog(null, Label);
+		GridLayout gridTest = new GridLayout();
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File("images/map/TempRoom.png"));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		Image rimg = img.getScaledInstance(img.getWidth()*10, img.getWidth()*10, Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(rimg);
+		JLabel label1 = new JLabel(icon);
+		JPanel gridPanel = new JPanel();
+		gridPanel.setLayout(gridTest);
+		gridPanel.add(label1);
+		JFrame frame = new JFrame("map");
+		frame.getContentPane().add(gridPanel);
+		frame.pack();
+		frame.setVisible(true);
+		
+	}
+	ImageIcon createImageIcon(String path, String description)
+	{
+		java.net.URL imgURL = getClass().getResource(path);
+		if (imgURL != null)
+		{
+			return new ImageIcon(imgURL, description);
+		}
+		else
+		{
+			System.out.println("");
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
 	}
 }

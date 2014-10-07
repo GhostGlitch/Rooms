@@ -8,7 +8,7 @@ import view.Print;
  * Starts up the program Rooms.
  * 
  * @author GhostGlitch and Narpas-Sword
- * @version 0.6.5
+ * @version 0.7.6
  */
 public class Controller
 {
