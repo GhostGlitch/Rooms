@@ -21,11 +21,11 @@ public class Setup
 	 * The highest value a room is allowed to generate at. Must be greater than
 	 * GenMin.
 	 */
-	private int GenMax = 9;
+	private int GenMax = 15;
 	/**
 	 * The X and Y coordinates of the start room.
 	 */
-	private int GenCent = 4;
+	private int GenCent = 7;
 	/**
 	 * The Chance a room has to generate if it has 1 room adjacent to it.
 	 */

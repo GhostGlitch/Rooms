@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import model.Board;
 import model.Setup;
@@ -256,15 +257,10 @@ public class Print
 
 	public void PrintBoardPopup(Setup setup, Board board)
 	{
-		String Map = "<html>";
-		GridLayout gridTest = new GridLayout(0, 11);
+		BufferedImage img = LoadImage("Map/TempRoom.png");
+		GridLayout gridTest = new GridLayout(0, setup.getGenMax() + 2);
 		JPanel gridPanel = new JPanel();
 		gridPanel.setLayout(gridTest);
-		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
-		{
-			Map = Map + "  ";
-		}
-		Map = Map + "[" + setup.RoomCount() + "]<br>";
 		for (int i = setup.getGenMin(); i <= setup.getGenMax() + 1; i++)
 		{
 			if (i == setup.getGenMin())
@@ -318,14 +314,14 @@ public class Print
 				gridPanel.add(BigImgLbl("Map/TempHorizontal.png"));
 			}
 		}
-		Map = Map + "<br>";
-		Map = Map + "<html>";
-		System.out.print(Map);
 		JFrame frame = new JFrame("map");
+		JTextField input = new JTextField(1);
+		gridPanel.add(input);
 		frame.getContentPane().add(gridPanel);
 		frame.pack();
+		frame.setResizable(false);
 		frame.setVisible(true);
-
+		CustomDialog debug = new CustomDialog(frame, true, "words", (img.getWidth() * 15 * (setup.getGenMax() + 2))/2, (img.getWidth() * 15 * (setup.getGenMax() + 2)) + img.getWidth());
 	}
 
 	Image Resize(BufferedImage img, int amount)
@@ -350,6 +346,6 @@ public class Print
 
 	JLabel BigImgLbl(String location)
 	{
-		return new JLabel(new ImageIcon(Resize(LoadImage(location), 10)));
+		return new JLabel(new ImageIcon(Resize(LoadImage(location), 15)));
 	}
 }
