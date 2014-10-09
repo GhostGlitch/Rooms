@@ -316,12 +316,11 @@ public class Print
 		}
 		JFrame frame = new JFrame("map");
 		JTextField input = new JTextField(1);
+		frame.setResizable(false);
 		gridPanel.add(input);
 		frame.getContentPane().add(gridPanel);
 		frame.pack();
-		frame.setResizable(false);
 		frame.setVisible(true);
-		CustomDialog debug = new CustomDialog(frame, true, "words", (img.getWidth() * 15 * (setup.getGenMax() + 2))/2, (img.getWidth() * 15 * (setup.getGenMax() + 2)) + img.getWidth());
 	}
 
 	Image Resize(BufferedImage img, int amount)
