@@ -1,12 +1,16 @@
 package view;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -258,9 +262,10 @@ public class Print
 	public void PrintBoardPopup(Setup setup, Board board)
 	{
 		BufferedImage img = LoadImage("Map/TempRoom.png");
-		GridLayout gridTest = new GridLayout(0, setup.getGenMax() + 2);
 		JPanel gridPanel = new JPanel();
-		gridPanel.setLayout(gridTest);
+		gridPanel.setLayout(new GridLayout(0, setup.getGenMax() + 2));
+		JPanel boxPanel = new JPanel();
+		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
 		for (int i = setup.getGenMin(); i <= setup.getGenMax() + 1; i++)
 		{
 			if (i == setup.getGenMin())
@@ -314,11 +319,21 @@ public class Print
 				gridPanel.add(BigImgLbl("Map/TempHorizontal.png"));
 			}
 		}
+		boxPanel.add(gridPanel);
+		final JTextField input = new JTextField();
+		Font font = new Font("Arial", Font.PLAIN, 50);
+		input.setFont(font);
+		input.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				input.setText("");
+			}
+		});
+		boxPanel.add(input);
 		JFrame frame = new JFrame("map");
-		JTextField input = new JTextField(1);
 		frame.setResizable(false);
-		gridPanel.add(input);
-		frame.getContentPane().add(gridPanel);
+		frame.getContentPane().add(boxPanel);
 		frame.pack();
 		frame.setVisible(true);
 	}
