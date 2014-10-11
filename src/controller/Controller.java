@@ -2,13 +2,14 @@ package controller;
 
 import model.Board;
 import model.Setup;
+import view.GUI;
 import view.Print;
 
 /**
  * Starts up the program Rooms.
  * 
  * @author GhostGlitch and Narpas-Sword
- * @version 0.7.6
+ * @version 0.8.5
  */
 public class Controller
 {
@@ -23,11 +24,12 @@ public class Controller
 		Setup setup = new Setup();
 		Board board = new Board(setup);
 		Print print = new Print();
+		GUI gui = new GUI();
 		print.PrintSetup(setup);
 		print.PrintSetupSimple(setup);
 		print.PrintBoardSimple(setup, board);
 		print.PrintBoard(setup, board);
-		print.PrintBoardPopup(setup, board);
+		gui.PrintBoardPopup(setup, board);
 	}
 	
 	public boolean EdgeTest(Setup setup,int index,int index1)
