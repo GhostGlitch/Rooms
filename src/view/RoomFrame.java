@@ -5,11 +5,11 @@ import controller.Controller;
 
 public class RoomFrame extends JFrame
 {
-	private RoomPanel panel;
+	private MapPanel panel;
 
 	public RoomFrame(Controller controller)
 	{
-		panel = new RoomPanel(controller);
+		panel = new MapPanel(controller);
 		setupFrame();
 	}
 	private void setupFrame()

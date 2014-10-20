@@ -26,13 +26,8 @@ public class Controller
 	public Controller()
 	{
 		Board board = new Board(setup);
-		Print print = new Print();
 		RGUI gui = new RGUI();
 		RoomFrame frame = new RoomFrame(this);
-		print.PrintSetup(setup);
-		print.PrintSetupSimple(setup);
-		print.PrintBoardSimple(setup, board);
-		print.PrintBoard(setup, board);
 		gui.PrintBoardPopup(setup, board);
 	}
 	public boolean EdgeTest(Setup setup,int index,int index1)

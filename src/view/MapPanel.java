@@ -6,11 +6,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import view.RGUI;
 
-public class RoomPanel extends JPanel
+public class MapPanel extends JPanel
 {
 	RGUI R = new RGUI();
 	private Controller controller;
-	public RoomPanel(Controller controller)
+	public MapPanel(Controller controller)
 	{
 		this.controller = controller;
 		setupPanel();
