@@ -20,18 +20,18 @@ import javax.swing.JTextField;
 import model.Board;
 import model.Setup;
 
-public class GUI
+public class RGUI
 {
-	String Room = "Map/TempRoom.png";
-	String Empty = "Map/TempEmpty.png";
-	String Horizontal = "Map/TempHorizontal.png";
-	String Vertical = "Map/TempVertical.png";
-	String TopLeft = "Map/TempTopLeft.png";
-	String TopRight = "Map/TempTopRight.png";
-	String BottomLeft = "Map/TempBottomLeft.png";
-	String BottomRight = "Map/TempBottomRight.png";
-	String VSpace = "Other/VerticalSpacer.png";
-	String HSpace = "Other/HorizontalSpacer.png";
+	public String Room = "Map/TempRoom.png";
+	public String Empty = "Map/TempEmpty.png";
+	public String Horizontal = "Map/TempHorizontal.png";
+	public String Vertical = "Map/TempVertical.png";
+	public String TopLeft = "Map/TempTopLeft.png";
+	public String TopRight = "Map/TempTopRight.png";
+	public String BottomLeft = "Map/TempBottomLeft.png";
+	public String BottomRight = "Map/TempBottomRight.png";
+	public String VSpace = "Other/VerticalSpacer.png";
+	public String HSpace = "Other/HorizontalSpacer.png";
 	JPanel mapPanel = new JPanel();
 	JPanel VertBox = new JPanel();
 	JPanel InputBox = new JPanel();
@@ -102,7 +102,7 @@ public class GUI
 		}
 		VertBox.add(mapPanel);
 		final JTextField input = new JTextField();
-		Font font = new Font("Arial", Font.PLAIN, 48);
+		Font font = new Font("Arial", Font.PLAIN, 35);
 		input.setFont(font);
 		input.addActionListener(new ActionListener()
 		{
@@ -117,11 +117,12 @@ public class GUI
 		VertBox.add(InputBox);
 		VertBox.add(BottomSpace);
 		frame.getContentPane().add(VertBox);
+		frame.setResizable(false);
 		frame.pack();
-		frame.setVisible(true);
+		//frame.setVisible(true);
 	}
 
-	JLabel LoadBigImg(String location)
+	public JLabel LoadBigImg(String location)
 	{
 		BufferedImage img = null;
 		try
@@ -132,7 +133,7 @@ public class GUI
 		{
 			e.printStackTrace();
 		}
-		return new JLabel(new ImageIcon(img.getScaledInstance(img.getWidth() * 20, img.getHeight() * 20, Image.SCALE_SMOOTH)));
+		return new JLabel(new ImageIcon(img.getScaledInstance(img.getWidth() * 15, img.getHeight() * 15, Image.SCALE_SMOOTH)));
 	}
 
 	JLabel LoadBigImg1(String location)
@@ -146,6 +147,6 @@ public class GUI
 		{
 			e.printStackTrace();
 		}
-		return new JLabel(new ImageIcon(img.getScaledInstance(img.getWidth() * 20, (img.getHeight() * 20) + 2, Image.SCALE_SMOOTH)));
+		return new JLabel(new ImageIcon(img.getScaledInstance(img.getWidth() * 15, (img.getHeight() * 15) + 2, Image.SCALE_SMOOTH)));
 	}
 }

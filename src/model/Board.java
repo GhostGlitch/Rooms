@@ -6,7 +6,6 @@ import controller.Controller;
 
 public class Board
 {
-	Controller controller = new Controller();
 	int index;
 	int index1;
 	boolean isEdge = false;

@@ -1,9 +1,12 @@
 package controller;
 
+import java.awt.Frame;
+
 import model.Board;
 import model.Setup;
-import view.GUI;
+import view.RGUI;
 import view.Print;
+import view.RoomFrame;
 
 /**
  * Starts up the program Rooms.
@@ -11,27 +14,27 @@ import view.Print;
  * @author GhostGlitch and Narpas-Sword
  * @version 0.8.5
  */
+
 public class Controller
 {
-
+	public Setup setup = new Setup(this);
 	/**
 	 * Starts up the program Rooms.
 	 * 
 	 * @param args Java requirement.
 	 */
-	public static void main(String[] args)
+	public Controller()
 	{
-		Setup setup = new Setup();
 		Board board = new Board(setup);
 		Print print = new Print();
-		GUI gui = new GUI();
+		RGUI gui = new RGUI();
+		RoomFrame frame = new RoomFrame(this);
 		print.PrintSetup(setup);
 		print.PrintSetupSimple(setup);
 		print.PrintBoardSimple(setup, board);
 		print.PrintBoard(setup, board);
 		gui.PrintBoardPopup(setup, board);
 	}
-	
 	public boolean EdgeTest(Setup setup,int index,int index1)
 	{
 		boolean isEdge = false;

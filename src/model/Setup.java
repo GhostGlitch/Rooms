@@ -11,7 +11,6 @@ import controller.Controller;
  */
 public class Setup
 {
-	Controller controller = new Controller();
 	/**
 	 * The lowest value a room is allowed to generate at. Must be greater than
 	 * 0.
@@ -72,7 +71,7 @@ public class Setup
 		Random rand = new Random();
 		return Min + (Max - Min) * rand.nextDouble();
 	}
-	public Setup()
+	public Setup(Controller controller)
 	{
 		Setup[GenCent][GenCent] = true;
 		Dummy[GenCent][GenCent] = true;
