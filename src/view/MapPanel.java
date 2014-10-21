@@ -20,7 +20,7 @@ public class MapPanel extends JPanel
 
 	private void setupPanel()
 	{
-		setBackground(Color.CYAN);
+		setBackground(Color.GREEN);
 		for (int i = controller.setup.getGenMin(); i <= controller.setup.getGenMax() + 1; i++)
 		{
 			if (i == controller.setup.getGenMin())
@@ -79,7 +79,6 @@ public class MapPanel extends JPanel
 	private void setupLayout()
 	{
 		setLayout(new GridLayout(0, controller.setup.getGenMax() + 2));
-		
 	}
 
 	private void setupListeners()
