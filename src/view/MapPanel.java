@@ -1,10 +1,11 @@
 package view;
 
-import javax.swing.JPanel;
-import controller.Controller;
 import java.awt.Color;
 import java.awt.GridLayout;
-import view.RGUI;
+
+import javax.swing.JPanel;
+
+import controller.Controller;
 
 public class MapPanel extends JPanel
 {
@@ -20,7 +21,7 @@ public class MapPanel extends JPanel
 
 	private void setupPanel()
 	{
-		setBackground(Color.GREEN);
+		setBackground(Color.CYAN);
 		for (int i = controller.setup.getGenMin(); i <= controller.setup.getGenMax() + 1; i++)
 		{
 			if (i == controller.setup.getGenMin())

@@ -1,24 +1,40 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JFrame;
+
 import controller.Controller;
-import javax.swing.BoxLayout;
 
 public class RoomFrame extends JFrame
 {
 	private CombinePanel combine;
+	private Controller c;
 
-	public RoomFrame(Controller controller)
+	public RoomFrame(Controller c)
 	{
+		getContentPane().setBackground(Color.BLACK);
+		this.c = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		combine = new CombinePanel(controller);
 		setupFrame();
 	}
 	private void setupFrame()
 	{
-		getContentPane().add(combine);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+
+		getContentPane().setLayout(gridBagLayout);
+		combine = new CombinePanel(c);
+		GridBagConstraints gbc_combine = new GridBagConstraints();
+		gbc_combine.anchor = GridBagConstraints.NORTHWEST;
+		gbc_combine.gridx = 0;
+		gbc_combine.gridy = 0;
+		getContentPane().add(combine, gbc_combine);
 		this.setResizable(true);
-		setSize(combine.getPreferredSize());
+		pack();
+		setMinimumSize(new Dimension((int) combine.getPreferredSize().getWidth() + 26, (int) combine.getPreferredSize().getHeight() + 71));
 		this.setVisible(true);
 	}
 }

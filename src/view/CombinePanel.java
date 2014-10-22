@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import controller.Controller;
-
-import javax.swing.BoxLayout;
 
 public class CombinePanel extends JPanel
 {
@@ -20,13 +17,13 @@ public class CombinePanel extends JPanel
 		map = new MapPanel(c);
 		map.setSize(map.getPreferredSize());
 		input = new InputPanel(c);
-		input.setBounds(0, 0 + map.getHeight(), (int) map.getPreferredSize().getWidth(),input.getHeight());
+		input.setBounds(0, 0 + map.getHeight(), (int) map.getPreferredSize().getWidth(), input.getHeight());
+		input.fixSize();
 		setSize(getPreferredSize());
 		
 		setupPanel();
 		setupLayout();
 		setupListeners();
-		
 		setBackground(Color.BLUE);
 	}
 	private void setupListeners()
@@ -40,16 +37,12 @@ public class CombinePanel extends JPanel
 	private void setupPanel()
 	{
 		setLayout(null);
-		this.add(map);
-		this.add(input);
-	}
-	private void setPrefferedSize()
-	{
-		d = new Dimension(input.getWidth(), map.getHeight() + input.getHeight());
+		add(map);
+		add(input);
 	}
 	public Dimension getPreferredSize()
 	{
+		return new Dimension(input.getWidth(), map.getHeight() + input.getHeight());
 
-		return d;
 	}
 }
