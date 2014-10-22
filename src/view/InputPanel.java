@@ -27,7 +27,7 @@ public class InputPanel extends JPanel
 		txtInput.setForeground(new Color(185, 194, 198));
 		txtInput.setBackground(Color.BLACK);
 		txtInput.setBounds(10, 11, 80, 44);
-		setSize(txtInput.getHeight() + R.scale, txtInput.getWidth() + (R.scale) * 2);
+		setSize(0, txtInput.getHeight() + (R.scale * 2));
 		add(txtInput);
 	}
 
