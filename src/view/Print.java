@@ -1,13 +1,13 @@
 package view;
 
 import model.Board;
-import model.Setup;
+import model.Layout;
 
 /**
  * Outputs either the Setup or the Board to the Console
  * 
  * @author GhostGlitch
- * @see Setup
+ * @see Layout
  * @see Board
  */
 public class Print
@@ -18,7 +18,7 @@ public class Print
 	 * @param setup
 	 *            a Rooms object to get the setup
 	 */
-	public void PrintSetup(Setup setup)
+	public void PrintSetup(Layout setup)
 	{
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
@@ -60,7 +60,7 @@ public class Print
 		System.out.println();
 	}
 
-	public void PrintSetupSimple(Setup setup)
+	public void PrintSetupSimple(Layout setup)
 	{
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
@@ -102,7 +102,7 @@ public class Print
 		System.out.println();
 	}
 
-	public void PrintBoardSimple(Setup setup, Board board)
+	public void PrintBoardSimple(Layout setup, Board board)
 	{
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 1.5) - 2; i++)
 		{
@@ -155,7 +155,7 @@ public class Print
 		}
 	}
 
-	public void PrintBoard(Setup setup, Board board)
+	public void PrintBoard(Layout setup, Board board)
 	{
 		System.out.println();
 		for (int i = setup.getGenMin(); i <= (setup.getGenMax() * 3.5) - 2; i++)

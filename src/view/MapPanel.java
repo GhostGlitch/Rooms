@@ -1,89 +1,70 @@
 package view;
 
-import java.awt.Color;
 import java.awt.GridLayout;
-
 import javax.swing.JPanel;
-
 import controller.Controller;
 
 public class MapPanel extends JPanel
 {
 	RGUI R = new RGUI();
-	private Controller controller;
-	public MapPanel(Controller controller)
-	{
-		this.controller = controller;
-		setupPanel();
-		setupLayout();
-		setupListeners();
-	}
+	private Controller c;
 
-	private void setupPanel()
+	public MapPanel(Controller c)
 	{
-		setBackground(Color.CYAN);
-		for (int i = controller.setup.getGenMin(); i <= controller.setup.getGenMax() + 1; i++)
+		setLayout(new GridLayout(0, c.layout.getGenMax() + 2));
+		setOpaque(false);
+		for (int i = c.layout.getGenMin(); i <= c.layout.getGenMax() + 1; i++)
 		{
-			if (i == controller.setup.getGenMin())
+			if (i == c.layout.getGenMin())
 			{
-				this.add(R.LoadBigImg(R.TopLeft));
+				add(R.LoadBigImgLbl(R.TopLeft));
 			}
-			else if (i == controller.setup.getGenMax() + 1)
+			else if (i == c.layout.getGenMax() + 1)
 			{
-				this.add(R.LoadBigImg(R.TopRight));
+				add(R.LoadBigImgLbl(R.TopRight));
 			}
 			else
 			{
-				this.add(R.LoadBigImg(R.Horizontal));
+				add(R.LoadBigImgLbl(R.Horizontal));
 			}
 		}
-		for (int index = controller.setup.getGenMin(); index < controller.setup.getGenMax(); index++)
+		for (int index = c.layout.getGenMin(); index < c.layout.getGenMax(); index++)
 		{
-			this.add(R.LoadBigImg(R.Vertical));
-			for (int index1 = controller.setup.getGenMin(); index1 < controller.setup.getGenMax(); index1++)
+			add(R.LoadBigImgLbl(R.Vertical));
+			for (int index1 = c.layout.getGenMin(); index1 < c.layout.getGenMax(); index1++)
 			{
-				if (controller.setup.get()[index][index1])
+				if (c.layout.get()[index][index1])
 				{
-					if (index == controller.setup.getGenCent() && index1 == controller.setup.getGenCent())
+					if (index == c.layout.getGenCent() && index1 == c.layout.getGenCent())
 					{
-						this.add(R.LoadBigImg(R.Room));
+						add(R.LoadBigImgLbl(R.Room));
 					}
 					else
 					{
-						this.add(R.LoadBigImg(R.Room));
+						add(R.LoadBigImgLbl(R.Room));
 					}
 				}
 				else
 				{
-					this.add(R.LoadBigImg(R.Empty));
+					add(R.LoadBigImgLbl(R.Empty));
 				}
 			}
-			this.add(R.LoadBigImg(R.Vertical));
+			add(R.LoadBigImgLbl(R.Vertical));
 		}
-		for (int i = controller.setup.getGenMin(); i <= controller.setup.getGenMax() + 1; i++)
+		for (int i = c.layout.getGenMin(); i <= c.layout.getGenMax() + 1; i++)
 		{
-			if (i == controller.setup.getGenMin())
+			if (i == c.layout.getGenMin())
 			{
-				this.add(R.LoadBigImg(R.BottomLeft));
+				add(R.LoadBigImgLbl(R.BottomLeft));
 			}
-			else if (i == controller.setup.getGenMax() + 1)
+			else if (i == c.layout.getGenMax() + 1)
 			{
-				this.add(R.LoadBigImg(R.BottomRight));
+				add(R.LoadBigImgLbl(R.BottomRight));
 			}
 			else
 			{
-				this.add(R.LoadBigImg(R.Horizontal));
+				add(R.LoadBigImgLbl(R.Horizontal));
 			}
 		}
-	}
-
-	private void setupLayout()
-	{
-		setLayout(new GridLayout(0, controller.setup.getGenMax() + 2));
-	}
-
-	private void setupListeners()
-	{
-
 	}
 }

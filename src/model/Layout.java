@@ -9,7 +9,7 @@ import controller.Controller;
  * 
  * @authors GhostGlitch & Narpas-Sword
  */
-public class Setup
+public class Layout
 {
 	/**
 	 * The lowest value a room is allowed to generate at. Must be greater than
@@ -55,25 +55,25 @@ public class Setup
 	/**
 	 * Where rooms are and aren't.
 	 */
-	boolean[][] Setup = new boolean[GenMax][GenMax];
+	boolean[][] Layout = new boolean[GenMax][GenMax];
 	/**
-	 * A dummy of Setup
+	 * A dummy of Layout
 	 * 
-	 * @see Setup
+	 * @see Layout
 	 */
 	boolean[][] Dummy = new boolean[GenMax][GenMax];
 
 	/**
-	 * Generates a new setup of rooms.
+	 * Generates a new layout of rooms.
 	 */
 	private double RanDouble(double Min, double Max)
 	{
 		Random rand = new Random();
 		return Min + (Max - Min) * rand.nextDouble();
 	}
-	public Setup(Controller controller)
+	public Layout(Controller controller)
 	{
-		Setup[GenCent][GenCent] = true;
+		Layout[GenCent][GenCent] = true;
 		Dummy[GenCent][GenCent] = true;
 		while (RoomCount() < MinRooms || RoomCount() > MaxRooms)
 		{
@@ -85,7 +85,7 @@ public class Setup
 					for (int index1 = GenMin; index1 < GenMax; index1++)
 					{
 
-						if (!(Setup[index][index1]))
+						if (!(Layout[index][index1]))
 						{
 							Dummy[index][index1] = getSurroundingBool(index, index1);
 						}
@@ -95,7 +95,7 @@ public class Setup
 				{
 					for (int index1 = GenMin; index1 < GenMax; index1++)
 					{
-						Setup[index][index1] = Dummy[index][index1];
+						Layout[index][index1] = Dummy[index][index1];
 					}
 				}
 			}
@@ -106,7 +106,7 @@ public class Setup
 				if (controller.EdgeTest(this, index, index1))
 				{
 						Dummy[index][index1] = false;
-						Setup[index][index1] = false;
+						Layout[index][index1] = false;
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public class Setup
 		{
 			for (int index1 = GenMin; index1 < GenMax; index1++)
 			{
-				if (Setup[index][index1])
+				if (Layout[index][index1])
 				{
 					roomCount++;
 				}
@@ -149,28 +149,28 @@ public class Setup
 		double percent = 0;
 		if (index < GenMax - 1)
 		{
-			if (Setup[index + 1][index1])
+			if (Layout[index + 1][index1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
 		if (index > GenMin)
 		{
-			if (Setup[index - 1][index1])
+			if (Layout[index - 1][index1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
 		if (index1 < GenMax - 1)
 		{
-			if (Setup[index][index1 + 1])
+			if (Layout[index][index1 + 1])
 			{
 				roomCount = roomCount + 1;
 			}
 		}
 		if (index1 > GenMin)
 		{
-			if (Setup[index][index1 - 1])
+			if (Layout[index][index1 - 1])
 			{
 				roomCount = roomCount + 1;
 			}
@@ -247,24 +247,24 @@ public class Setup
 	}
 
 	/**
-	 * Getter for Setup
+	 * Getter for Layout
 	 * 
-	 * @return Setup
+	 * @return Layout
 	 */
 	public boolean[][] get()
 	{
-		return Setup;
+		return Layout;
 	}
 
 	/**
-	 * Setter for array Setup
+	 * Setter for array Layout
 	 * 
-	 * @param setup
-	 *            new value for Setup
+	 * @param layout
+	 *            new value for Layout
 	 */
-	public void setSetup(boolean[][] setup)
+	public void setLayout(boolean[][] layout)
 	{
-		Setup = setup;
+		Layout = layout;
 	}
 
 	/**

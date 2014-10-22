@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import javax.swing.UIManager;
 
 public class CombinePanel extends JPanel
 {
@@ -24,7 +25,7 @@ public class CombinePanel extends JPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-		setBackground(Color.BLUE);
+		setBackground(new Color(92, 106, 112));
 	}
 	private void setupListeners()
 	{

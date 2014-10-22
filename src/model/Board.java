@@ -13,7 +13,7 @@ public class Board
 	double roomsPerTreasure = 10;
 	double roomsPerBoss = 20;
 
-	public Board(Setup setup)
+	public Board(Layout setup)
 	{
 		Board = new int[setup.getGenMax()][setup.getGenMax()];
 		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
@@ -90,7 +90,7 @@ public class Board
 		}
 	}
 
-	private int RanInt(Setup setup)
+	private int RanInt(Layout setup)
 	{
 		Random rand = new Random();
 		return rand.nextInt((setup.getGenMax() - setup.getGenMin())) + setup.getGenMin();
@@ -101,7 +101,7 @@ public class Board
 		return Board;
 	}
 
-	boolean EdgeTest(Setup setup)
+	boolean EdgeTest(Layout setup)
 	{
 		isEdge = false;
 		if (setup.get()[index][index1] && !(index == setup.getGenCent() && index1 == setup.getGenCent()))

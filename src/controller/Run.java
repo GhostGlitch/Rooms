@@ -1,7 +1,7 @@
 package controller;
 
 import model.Board;
-import model.Setup;
+import model.Layout;
 import view.Print;
 import view.RGUI;
 

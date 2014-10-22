@@ -10,25 +10,25 @@ import controller.Controller;
 
 public class InputPanel extends JPanel
 {
-	private JTextField textField;
+	RGUI R = new RGUI();
+	private JTextField txtInput;
 
 	public InputPanel(Controller c)
 	{
+		setOpaque(false);
 		setupPanel();
 		setupLayout();
 		setupListeners();
-
-		setBackground(Color.CYAN);
 		setLayout(null);
-		setSize(100, 85);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Courier New", Font.PLAIN, 37));
-		textField.setBorder(null);
-		textField.setForeground(Color.CYAN);
-		textField.setBackground(Color.BLACK);
-		textField.setBounds(21, 21, 206, 43);
-		add(textField);
+		txtInput = new JTextField();
+		txtInput.setFont(new Font("Arial", Font.PLAIN, 37));
+		txtInput.setBorder(null);
+		txtInput.setForeground(new Color(185, 194, 198));
+		txtInput.setBackground(Color.BLACK);
+		txtInput.setBounds(10, 11, 80, 44);
+		setSize(txtInput.getHeight() + R.scale, txtInput.getWidth() + (R.scale) * 2);
+		add(txtInput);
 	}
 
 	private void setupListeners()
@@ -48,6 +48,6 @@ public class InputPanel extends JPanel
 
 	public void fixSize()
 	{
-		textField.setBounds(10, 11, this.getWidth() - 20, this.getHeight() - 22);
+		txtInput.setBounds(R.scale, 0, getWidth() - (R.scale * 2), getHeight() - R.scale);
 	}
 }

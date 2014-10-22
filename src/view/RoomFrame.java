@@ -32,9 +32,9 @@ public class RoomFrame extends JFrame
 		gbc_combine.gridx = 0;
 		gbc_combine.gridy = 0;
 		getContentPane().add(combine, gbc_combine);
-		this.setResizable(true);
+		setResizable(true);
 		pack();
-		setMinimumSize(new Dimension((int) combine.getPreferredSize().getWidth() + 26, (int) combine.getPreferredSize().getHeight() + 71));
-		this.setVisible(true);
+		setMinimumSize(getPreferredSize());
+		setVisible(true);
 	}
 }
