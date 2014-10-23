@@ -5,30 +5,29 @@ import java.awt.Font;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
 
 public class InputPanel extends JPanel
 {
-	RGUI R = new RGUI();
-	private JTextField txtInput;
+	Images Img = new Images();
+	private JTextField txtFld;
 
 	public InputPanel(Controller c)
 	{
-		setOpaque(false);
-		setupPanel();
-		setupLayout();
-		setupListeners();
 		setLayout(null);
-
-		txtInput = new JTextField();
-		txtInput.setFont(new Font("Arial", Font.PLAIN, 37));
-		txtInput.setBorder(null);
-		txtInput.setForeground(new Color(185, 194, 198));
-		txtInput.setBackground(Color.BLACK);
-		txtInput.setBounds(10, 11, 80, 44);
-		setSize(0, txtInput.getHeight() + (R.scale * 2));
-		add(txtInput);
+		txtFld = new JTextField();
+		txtFld.setBounds(10, 11, 80, 44);
+		setSize(0, txtFld.getHeight() + (Img.getScaleBy() * 2));
+		setOpaque(false);
+		txtFld.setFont(new Font("Arial", Font.PLAIN, 40));
+		txtFld.setBorder(new EmptyBorder(0, 10, 0, 10));
+		txtFld.setForeground(new Color(185, 194, 198));
+		txtFld.setBackground(Color.BLACK);
+		txtFld.setCaretColor(new Color(185, 194, 198));
+		add(txtFld);
+		setupListeners();
 	}
 
 	private void setupListeners()
@@ -36,18 +35,8 @@ public class InputPanel extends JPanel
 
 	}
 
-	private void setupLayout()
+	public void resizeTxtFld()
 	{
-
-	}
-
-	private void setupPanel()
-	{
-
-	}
-
-	public void fixSize()
-	{
-		txtInput.setBounds(R.scale, 0, getWidth() - (R.scale * 2), getHeight() - R.scale);
+		txtFld.setBounds(Img.getScaleBy(), 0, getWidth() - (Img.getScaleBy() * 2), getHeight() - Img.getScaleBy());
 	}
 }

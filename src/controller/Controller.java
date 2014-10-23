@@ -1,11 +1,8 @@
 package controller;
 
-import java.awt.Frame;
-
 import model.Board;
 import model.Layout;
-import view.RGUI;
-import view.Print;
+import view.Images;
 import view.RoomFrame;
 
 /**
@@ -17,7 +14,7 @@ import view.RoomFrame;
 
 public class Controller
 {
-	RGUI R = new RGUI();
+	public Images R = new Images();
 	public Layout layout = new Layout(this);
 	/**
 	 * Starts up the program Rooms.
@@ -26,12 +23,11 @@ public class Controller
 	 */
 	public Controller()
 	{
-		Board board = new Board(layout);
-		RGUI R = new RGUI();
-		RoomFrame frame = new RoomFrame(this);
+		new Board(layout);
+		new RoomFrame(this);
 
 	}
-	public boolean EdgeTest(Layout setup,int index,int index1)
+	public boolean edgeTest(Layout setup,int index,int index1)
 	{
 		boolean isEdge = false;
 		if (setup.get()[index][index1] && !(index == setup.getGenCent() && index1 == setup.getGenCent()))

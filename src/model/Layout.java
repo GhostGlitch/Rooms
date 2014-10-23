@@ -43,11 +43,11 @@ public class Layout
 	double RoomChance4 = .00005;
 	double MinRmPercent = 0.25;
 	double MaxRmPercent = 0.40;
-	double ranRoomAmount = RanDouble(MinRmPercent, MaxRmPercent);
+	double RanRoomAmount = RanDouble(MinRmPercent, MaxRmPercent);
 	/**
 	 * The least rooms allowed to generate.
 	 */
-	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * ranRoomAmount);
+	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * RanRoomAmount);
 	/**
 	 * The most rooms allowed to generate.
 	 */
@@ -63,15 +63,16 @@ public class Layout
 	 */
 	boolean[][] Dummy = new boolean[GenMax][GenMax];
 
-	/**
-	 * Generates a new layout of rooms.
-	 */
 	private double RanDouble(double Min, double Max)
 	{
 		Random rand = new Random();
 		return Min + (Max - Min) * rand.nextDouble();
 	}
-	public Layout(Controller controller)
+
+	/**
+	 * Generates a new layout of rooms.
+	 */
+	public Layout(Controller c)
 	{
 		Layout[GenCent][GenCent] = true;
 		Dummy[GenCent][GenCent] = true;
@@ -103,10 +104,10 @@ public class Layout
 			{
 				int index = RanInt();
 				int index1 = RanInt();
-				if (controller.EdgeTest(this, index, index1))
+				if (c.edgeTest(this, index, index1))
 				{
-						Dummy[index][index1] = false;
-						Layout[index][index1] = false;
+					Dummy[index][index1] = false;
+					Layout[index][index1] = false;
 				}
 			}
 		}

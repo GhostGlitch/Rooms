@@ -1,69 +1,77 @@
 package view;
 
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
+
 import controller.Controller;
 
 public class MapPanel extends JPanel
 {
-	RGUI R = new RGUI();
-	private Controller c;
+	Images Img = new Images();
+	private Controller C;
 
-	public MapPanel(Controller c)
+	public MapPanel(Controller C)
 	{
-		setLayout(new GridLayout(0, c.layout.getGenMax() + 2));
+		this.C = C;
+		setLayout(new GridLayout(0, C.layout.getGenMax() + 2));
 		setOpaque(false);
-		for (int i = c.layout.getGenMin(); i <= c.layout.getGenMax() + 1; i++)
+		setupMap();
+	}
+
+	private void setupMap()
+	{
+		for (int i = C.layout.getGenMin(); i <= C.layout.getGenMax() + 1; i++)
 		{
-			if (i == c.layout.getGenMin())
+			if (i == C.layout.getGenMin())
 			{
-				add(R.LoadBigImgLbl(R.TopLeft));
+				add(Img.loadTile(Img.TopLeft));
 			}
-			else if (i == c.layout.getGenMax() + 1)
+			else if (i == C.layout.getGenMax() + 1)
 			{
-				add(R.LoadBigImgLbl(R.TopRight));
+				add(Img.loadTile(Img.TopRight));
 			}
 			else
 			{
-				add(R.LoadBigImgLbl(R.Horizontal));
+				add(Img.loadTile(Img.Horizontal));
 			}
 		}
-		for (int index = c.layout.getGenMin(); index < c.layout.getGenMax(); index++)
+		for (int index = C.layout.getGenMin(); index < C.layout.getGenMax(); index++)
 		{
-			add(R.LoadBigImgLbl(R.Vertical));
-			for (int index1 = c.layout.getGenMin(); index1 < c.layout.getGenMax(); index1++)
+			add(Img.loadTile(Img.Vertical));
+			for (int index1 = C.layout.getGenMin(); index1 < C.layout.getGenMax(); index1++)
 			{
-				if (c.layout.get()[index][index1])
+				if (C.layout.get()[index][index1])
 				{
-					if (index == c.layout.getGenCent() && index1 == c.layout.getGenCent())
+					if (index == C.layout.getGenCent() && index1 == C.layout.getGenCent())
 					{
-						add(R.LoadBigImgLbl(R.Room));
+						add(Img.loadTile(Img.Room));
 					}
 					else
 					{
-						add(R.LoadBigImgLbl(R.Room));
+						add(Img.loadTile(Img.Room));
 					}
 				}
 				else
 				{
-					add(R.LoadBigImgLbl(R.Empty));
+					add(Img.loadTile(Img.Empty));
 				}
 			}
-			add(R.LoadBigImgLbl(R.Vertical));
+			add(Img.loadTile(Img.Vertical));
 		}
-		for (int i = c.layout.getGenMin(); i <= c.layout.getGenMax() + 1; i++)
+		for (int i = C.layout.getGenMin(); i <= C.layout.getGenMax() + 1; i++)
 		{
-			if (i == c.layout.getGenMin())
+			if (i == C.layout.getGenMin())
 			{
-				add(R.LoadBigImgLbl(R.BottomLeft));
+				add(Img.loadTile(Img.BottomLeft));
 			}
-			else if (i == c.layout.getGenMax() + 1)
+			else if (i == C.layout.getGenMax() + 1)
 			{
-				add(R.LoadBigImgLbl(R.BottomRight));
+				add(Img.loadTile(Img.BottomRight));
 			}
 			else
 			{
-				add(R.LoadBigImgLbl(R.Horizontal));
+				add(Img.loadTile(Img.Horizontal));
 			}
 		}
 	}
