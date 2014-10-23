@@ -2,19 +2,19 @@ package controller;
 
 import model.Board;
 import model.Layout;
-import view.Images;
+import view.Img;
 import view.RoomFrame;
 
 /**
  * Starts up the program Rooms.
  * 
  * @author GhostGlitch and Narpas-Sword
- * @version 0.8.5
+ * @version 0.9.2
  */
 
 public class Controller
 {
-	public Images R = new Images();
+	public Img R = new Img();
 	public Layout layout = new Layout(this);
 	/**
 	 * Starts up the program Rooms.

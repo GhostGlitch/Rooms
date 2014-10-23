@@ -1,12 +1,5 @@
 package view;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -17,23 +10,20 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Images
+public class Img
 {
-	public enum Rotation {
-		QUARTER,HALF,THREE_QUARTER
+	public enum Rotn
+	{
+		QUARTER, HALF, THREE_QUARTER, COUNTER_QUARTER, COUNTER_THREE_QUARTER
 	}
-	static Rotation rotation;
+
 	public static String Room = "Map/TempRoom.png";
 	public static String Empty = "Map/TempEmpty.png";
-	public static String Horizontal = "Map/TempHorizontal.png";
-	public static String Vertical = "Map/TempVertical.png";
-	public static String TopLeft = "Map/TempTopLeft.png";
-	public static String TopRight = "Map/TempTopRight.png";
-	public static String BottomLeft = "Map/TempBottomLeft.png";
-	public static String BottomRight = "Map/TempBottomRight.png";
-	public static String VSpace = "Other/VerticalSpacer.png";
-	public static String HSpace = "Other/HorizontalSpacer.png";
+	public static String Borderln = "Map/TempLine.png";
+	public static String Corner = "Map/TempCorner.png";
+	public static String Spacer = "Other/Spacer.png";
 	private static int scaleBy = 15;
+
 	public static JLabel toLbl(BufferedImage img)
 	{
 		return new JLabel(new ImageIcon(img));
@@ -53,7 +43,7 @@ public class Images
 		return img;
 	}
 
-	public static BufferedImage scale(BufferedImage img, int scale) throws IOException
+	public static BufferedImage scale(int scale, BufferedImage img)
 	{
 		int W = img.getWidth();
 		int H = img.getHeight();
@@ -62,27 +52,50 @@ public class Images
 		return scaleAffline.filter(img, new BufferedImage(scale * W, scale * H, img.getType()));
 	}
 
-	public static BufferedImage rotate(BufferedImage img)
+	public static BufferedImage rotate(Rotn rotn, BufferedImage img)
 	{
-
-		
-		switch (rotation){
-		case HALF:
-			break;
-		case QUARTER:
-			break;
-		case THREE_QUARTER:
-			break;
-		default:
-			break;
-		}
 		int W = img.getWidth();
 		int H = img.getHeight();
-		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(90), (W / 2) + .5, (H / 2) + .5);
+		int W1;
+		int H1;
+		int angle;
+		switch (rotn)
+		{
+		case COUNTER_QUARTER:
+			W1 = H;
+			H1 = W;
+			angle = -90;
+			break;
+		case COUNTER_THREE_QUARTER:
+			W1 = H;
+			H1 = W;
+			angle = 90;
+			break;
+		case HALF:
+			W1 = W;
+			H1 = H;
+			angle = 180;
+			break;
+		case QUARTER:
+			W1 = H;
+			H1 = W;
+			angle = 90;
+			break;
+		case THREE_QUARTER:
+			W1 = H;
+			H1 = W;
+			angle = -90;
+			break;
+		default:
+			W1 = H;
+			H1 = W;
+			angle = 90;
+			break;
+		}
+		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(angle), (W / 2) + .5, (H / 2) + .5);
 		AffineTransformOp rotateAffline = new AffineTransformOp(rotateTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		return rotateAffline.filter(img, new BufferedImage(H, W, img.getType()));
+		return rotateAffline.filter(img, new BufferedImage(W1, H1, img.getType()));
 	}
-
 
 	public int getScaleBy()
 	{

@@ -3,7 +3,7 @@ package controller;
 import model.Board;
 import model.Layout;
 import view.Print;
-import view.Images;
+import view.Img;
 
 public class Run
 {
