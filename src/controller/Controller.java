@@ -14,7 +14,7 @@ import view.RoomFrame;
 
 public class Controller
 {
-	public Img R = new Img();
+	public Img img = new Img();
 	public Layout layout = new Layout(this);
 	/**
 	 * Starts up the program Rooms.

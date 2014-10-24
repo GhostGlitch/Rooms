@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -32,7 +34,15 @@ public class InputPanel extends JPanel
 
 	private void setupListeners()
 	{
+		txtFld.addActionListener(new ActionListener()
+		{
 
+			public void actionPerformed(ActionEvent Enter)
+			{
+				String txtFldVal = txtFld.getText();
+				txtFld.setText(null);
+			}
+		});
 	}
 
 	public void resizeTxtFld()
