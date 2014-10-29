@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -10,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import controller.Controller;
+
 public class Img
 {
 	public enum Rotn
@@ -17,24 +21,43 @@ public class Img
 		QUARTER, HALF, THREE_QUARTER, COUNTER_QUARTER, COUNTER_THREE_QUARTER
 	}
 
-	public static String Room = "Map/TempRoom.png";
-	public static String Empty = "Map/TempEmpty.png";
-	public static String Borderln = "Map/TempLine.png";
-	public static String Corner = "Map/TempCorner.png";
-	public static String Spacer = "Other/Spacer.png";
-	private static int scaleBy = 15;
+	public static BufferedImage Room = load("src/imgs/Map/TempRoom.png");
+	public static BufferedImage Empty = load("src/imgs/Map/TempEmpty.png");
+	public static BufferedImage Borderln = load("src/imgs/Map/TempLine.png");
+	public static BufferedImage Corner = load("src/imgs/Map/TempCorner.png");
+	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
+
+	
+	static int scaleBy = setScaleBy();
+	private static int setScaleBy()
+	{
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		int scrnWid = gd.getDisplayMode().getWidth();
+		int scrnHeit = gd.getDisplayMode().getHeight();
+		int scrnSiz = 0;
+		if (scrnWid > scrnHeit)
+		{
+			scrnSiz = scrnHeit;
+		}
+		else if (scrnWid < scrnHeit)
+		{
+			scrnSiz = scrnWid;
+		}
+		Controller c = new Controller();
+		return (scrnSiz/(c.layout.getGenMax()+2));
+	}
 
 	public static JLabel toLbl(BufferedImage img)
 	{
 		return new JLabel(new ImageIcon(img));
 	}
 
-	public static BufferedImage load(String location)
+	private static BufferedImage load(String location)
 	{
 		BufferedImage img = null;
 		try
 		{
-			img = ImageIO.read(new File("images/" + location));
+			img = ImageIO.read(new File(location));
 		}
 		catch (IOException e)
 		{
