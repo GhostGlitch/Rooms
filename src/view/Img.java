@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Font;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JComponent;
 
 import model.Layout;
 
@@ -33,7 +35,9 @@ public class Img
 		tst t = new tst();
 		if (t.width > t.height)
 		{
-			return (t.height / (3 * (Layout.getGenMax() + 3)));
+			System.out.println((int)(t.height / (3 * (Layout.getGenMax() + .66))));
+			System.out.println((int)(t.height / (3 * (Layout.getGenMax() + 3))));
+			return (int)(t.height / (3 * (Layout.getGenMax() + 3.6666)));
 		}
 		else
 		{
@@ -113,6 +117,24 @@ public class Img
 		AffineTransformOp rotateAffline = new AffineTransformOp(rotateTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return rotateAffline.filter(img, new BufferedImage(W1, H1, img.getType()));
 	}
+	public static Font getFont(String name, int style, int height) {
+
+	    int size = height;
+	    Boolean up = true;
+	    while (true) {
+	        Font font = new Font(name, style, size);
+	        int testHeight = Empty.getGraphics().getFontMetrics(font).getHeight();
+	        if (testHeight < height && up == true) {
+	            size++;
+	            up = true;
+	        } else if (testHeight > height && up == false) {
+	            size--;
+	            up = false;
+	        } else {
+	            return font;
+	        }
+	    }
+	}
 
 	public static int getScaleBy()
 	{
@@ -122,5 +144,10 @@ public class Img
 	public void setScaleBy(int scaleBy)
 	{
 		this.scaleBy = scaleBy;
+	}
+
+	public void say(Font font)
+	{
+		System.out.println(Empty.getGraphics().getFontMetrics(font).getHeight());
 	}
 }
