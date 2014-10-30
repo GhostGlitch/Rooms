@@ -13,18 +13,20 @@ import controller.Controller;
 
 public class InputPanel extends JPanel
 {
-	Img Img = new Img();
+	Img img = new Img();
 	private JTextField txtFld;
 
 	public InputPanel(Controller c)
 	{
+		Font font = new Font("Arial", Font.PLAIN, 40);
 		setLayout(null);
 		txtFld = new JTextField();
-		txtFld.setBounds(10, 11, 80, 44);
-		setSize(0, txtFld.getHeight() + (Img.getScaleBy() * 2));
+		txtFld.setBounds(10, 11, 20, img.Empty.getGraphics().getFontMetrics(font).getHeight());
+		setSize(0, txtFld.getHeight() + (img.scaleBy*2));
 		setOpaque(false);
-		txtFld.setFont(new Font("Arial", Font.PLAIN, 40));
-		txtFld.setBorder(new EmptyBorder(0, 10, 0, 10));
+		txtFld.setFont(font);
+		img.say(font);
+		txtFld.setBorder(new EmptyBorder(0, Img.scaleBy/2, 0, Img.scaleBy/2));
 		txtFld.setForeground(new Color(185, 194, 198));
 		txtFld.setBackground(Color.BLACK);
 		txtFld.setCaretColor(new Color(185, 194, 198));
@@ -47,6 +49,6 @@ public class InputPanel extends JPanel
 
 	public void resizeTxtFld()
 	{
-		txtFld.setBounds(Img.getScaleBy(), 0, getWidth() - (Img.getScaleBy() * 2), getHeight() - Img.getScaleBy());
+		txtFld.setBounds(img.getScaleBy(), 0, getWidth() - (img.getScaleBy() * 2), getHeight() - img.getScaleBy());
 	}
 }
