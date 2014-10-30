@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -25,6 +24,7 @@ public class RoomFrame extends JFrame
 	{
 		GridBagLayout gridBagLayout = new GridBagLayout();
 
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		getContentPane().setLayout(gridBagLayout);
 		combine = new CombinePanel(c);
 		GridBagConstraints gbc_combine = new GridBagConstraints();
@@ -34,6 +34,7 @@ public class RoomFrame extends JFrame
 		getContentPane().add(combine, gbc_combine);
 		setResizable(true);
 		pack();
+
 		setMinimumSize(getPreferredSize());
 		setVisible(true);
 	}

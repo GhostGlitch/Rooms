@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -12,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import controller.Controller;
+import model.Layout;
 
 public class Img
 {
@@ -28,23 +26,19 @@ public class Img
 	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
 
 	
-	static int scaleBy = setScaleBy();
-	private static int setScaleBy()
+	public static int scaleBy = setScaleBy();
+
+	public static int setScaleBy()
 	{
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		int scrnWid = gd.getDisplayMode().getWidth();
-		int scrnHeit = gd.getDisplayMode().getHeight();
-		int scrnSiz = 0;
-		if (scrnWid > scrnHeit)
+		tst t = new tst();
+		if (t.width > t.height)
 		{
-			scrnSiz = scrnHeit;
+			return (t.height / (3 * (Layout.getGenMax() + 3)));
 		}
-		else if (scrnWid < scrnHeit)
+		else
 		{
-			scrnSiz = scrnWid;
+			return (t.width / (3 * (Layout.getGenMax() + 2)));
 		}
-		Controller c = new Controller();
-		return (scrnSiz/(c.layout.getGenMax()+2));
 	}
 
 	public static JLabel toLbl(BufferedImage img)
@@ -120,7 +114,7 @@ public class Img
 		return rotateAffline.filter(img, new BufferedImage(W1, H1, img.getType()));
 	}
 
-	public int getScaleBy()
+	public static int getScaleBy()
 	{
 		return scaleBy;
 	}

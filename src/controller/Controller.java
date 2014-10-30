@@ -2,7 +2,6 @@ package controller;
 
 import model.Board;
 import model.Layout;
-import view.Img;
 import view.RoomFrame;
 
 /**
@@ -14,7 +13,7 @@ import view.RoomFrame;
 
 public class Controller
 {
-	public Img img = new Img();
+
 	public Layout layout = new Layout(this);
 	/**
 	 * Starts up the program Rooms.
@@ -25,6 +24,11 @@ public class Controller
 	{
 		new Board(layout);
 		new RoomFrame(this);
+
+	}
+
+	public Controller(String s)
+	{
 
 	}
 	public boolean edgeTest(Layout setup,int index,int index1)
