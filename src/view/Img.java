@@ -76,6 +76,12 @@ public class Img
 		int W1;
 		int H1;
 		int angle;
+		double WOffSet = 0;
+		double HOffSet = 0;
+		if (W % 2 == 1)
+			WOffSet = 0.5;
+		if (H % 2 == 1)
+			HOffSet = 0.5;
 		switch (rotn)
 		{
 		case COUNTER_QUARTER:
@@ -109,13 +115,12 @@ public class Img
 			angle = 90;
 			break;
 		}
-
-		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(angle), (W / 2), (H / 2));
+		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(angle), (W / 2) + WOffSet, (H / 2) + HOffSet);
 		AffineTransformOp rotateAffline = new AffineTransformOp(rotateTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return rotateAffline.filter(img, new BufferedImage(W1, H1, img.getType()));
 	}
 
-	public static Font getFont(String name, int style, int pixels)
+	public static Font pixFont(String name, int style, int pixels)
 	{
 		int under = 0;
 		int over = 0;

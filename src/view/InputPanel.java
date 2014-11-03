@@ -18,7 +18,7 @@ public class InputPanel extends JPanel
 
 	public InputPanel(Controller c)
 	{
-		Font font = Img.getFont("Arial", Font.PLAIN, Img.scaleBy * 3);
+		Font font = Img.pixFont("Arial", Font.PLAIN, Img.scaleBy * 3);
 		setLayout(null);
 		txtFld = new JTextField();
 		txtFld.setBounds(10, 11, 20, Img.Empty.getGraphics().getFontMetrics(font).getHeight());
