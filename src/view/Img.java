@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JComponent;
 
 import model.Layout;
 
@@ -27,7 +26,6 @@ public class Img
 	public static BufferedImage Corner = load("src/imgs/Map/TempCorner.png");
 	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
 
-	
 	public static int scaleBy = setScaleBy();
 
 	public static int setScaleBy()
@@ -35,9 +33,7 @@ public class Img
 		tst t = new tst();
 		if (t.width > t.height)
 		{
-			System.out.println((int)(t.height / (3 * (Layout.getGenMax() + .66))));
-			System.out.println((int)(t.height / (3 * (Layout.getGenMax() + 3))));
-			return (int)(t.height / (3 * (Layout.getGenMax() + 3.6666)));
+			return (int) (t.height / (3 * (Layout.getGenMax() + 3.6666)));
 		}
 		else
 		{
@@ -113,41 +109,38 @@ public class Img
 			angle = 90;
 			break;
 		}
-		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(angle), (W / 2) + .5, (H / 2) + .5);
+
+		AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(angle), (W / 2), (H / 2));
 		AffineTransformOp rotateAffline = new AffineTransformOp(rotateTransform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return rotateAffline.filter(img, new BufferedImage(W1, H1, img.getType()));
 	}
-	public static Font getFont(String name, int style, int height) {
 
-	    int size = height;
-	    Boolean up = true;
-	    while (true) {
-	        Font font = new Font(name, style, size);
-	        int testHeight = Empty.getGraphics().getFontMetrics(font).getHeight();
-	        if (testHeight < height && up == true) {
-	            size++;
-	            up = true;
-	        } else if (testHeight > height && up == false) {
-	            size--;
-	            up = false;
-	        } else {
-	            return font;
-	        }
-	    }
+	public static Font getFont(String name, int style, int pixels)
+	{
+		int under = 0;
+		int over = 0;
+		int unrPixels = Empty.getGraphics().getFontMetrics(new Font(name, style, under)).getHeight();
+		int ovrPixels = Empty.getGraphics().getFontMetrics(new Font(name, style, over)).getHeight();
+		for (over = 1; ovrPixels < pixels; over++)
+		{
+			ovrPixels = Empty.getGraphics().getFontMetrics(new Font(name, style, over)).getHeight();
+		}
+		for (under = over * 2; unrPixels > pixels; under--)
+		{
+			unrPixels = Empty.getGraphics().getFontMetrics(new Font(name, style, under)).getHeight();
+		}
+		if (pixels - unrPixels < ovrPixels - pixels)
+		{
+			return new Font(name, style, under);
+		}
+		else
+		{
+			return new Font(name, style, over);
+		}
 	}
 
 	public static int getScaleBy()
 	{
 		return scaleBy;
-	}
-
-	public void setScaleBy(int scaleBy)
-	{
-		this.scaleBy = scaleBy;
-	}
-
-	public void say(Font font)
-	{
-		System.out.println(Empty.getGraphics().getFontMetrics(font).getHeight());
 	}
 }

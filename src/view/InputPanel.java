@@ -18,14 +18,13 @@ public class InputPanel extends JPanel
 
 	public InputPanel(Controller c)
 	{
-		Font font = new Font("Arial", Font.PLAIN, 40);
+		Font font = Img.getFont("Arial", Font.PLAIN, Img.scaleBy * 3);
 		setLayout(null);
 		txtFld = new JTextField();
-		txtFld.setBounds(10, 11, 20, img.Empty.getGraphics().getFontMetrics(font).getHeight());
-		setSize(0, txtFld.getHeight() + (img.scaleBy*2));
+		txtFld.setBounds(10, 11, 20, Img.Empty.getGraphics().getFontMetrics(font).getHeight());
+		setSize(0, txtFld.getHeight() + (Img.scaleBy * 2));
 		setOpaque(false);
 		txtFld.setFont(font);
-		img.say(font);
 		txtFld.setBorder(new EmptyBorder(0, Img.scaleBy/2, 0, Img.scaleBy/2));
 		txtFld.setForeground(new Color(185, 194, 198));
 		txtFld.setBackground(Color.BLACK);
