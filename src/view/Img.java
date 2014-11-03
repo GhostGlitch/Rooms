@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import controller.Controller;
 import model.Layout;
 
 public class Img
@@ -19,25 +20,21 @@ public class Img
 	{
 		QUARTER, HALF, THREE_QUARTER, COUNTER_QUARTER, COUNTER_THREE_QUARTER
 	}
-
 	public static BufferedImage Room = load("src/imgs/Map/TempRoom.png");
 	public static BufferedImage Empty = load("src/imgs/Map/TempEmpty.png");
 	public static BufferedImage Borderln = load("src/imgs/Map/TempLine.png");
 	public static BufferedImage Corner = load("src/imgs/Map/TempCorner.png");
 	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
-
-	public static int scaleBy = setScaleBy();
-
-	public static int setScaleBy()
+    private static tst t = new tst();
+	public static int getScaleBy(Controller C)
 	{
-		tst t = new tst();
 		if (t.width > t.height)
 		{
-			return (int) (t.height / (3 * (Layout.getGenMax() + 3.6666)));
+			return (int) (t.height / (3 * (C.layout.getGenMax() + 3.6666)));
 		}
 		else
 		{
-			return (t.width / (3 * (Layout.getGenMax() + 2)));
+			return (t.width / (3 * (C.layout.getGenMax() + 2)));
 		}
 	}
 
@@ -142,10 +139,5 @@ public class Img
 		{
 			return new Font(name, style, over);
 		}
-	}
-
-	public static int getScaleBy()
-	{
-		return scaleBy;
 	}
 }

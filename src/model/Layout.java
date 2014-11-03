@@ -20,7 +20,7 @@ public class Layout
 	 * The highest value a room is allowed to generate at. Must be greater than
 	 * GenMin.
 	 */
-	private static int GenMax = 15;
+	private int GenMax = 15;
 	/**
 	 * The X and Y coordinates of the start room.
 	 */
@@ -231,7 +231,7 @@ public class Layout
 	 * 
 	 * @return GenMax
 	 */
-	public static int getGenMax()
+	public int getGenMax()
 	{
 		return GenMax;
 	}
