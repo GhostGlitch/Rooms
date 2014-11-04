@@ -25,7 +25,7 @@ public class Img
 	public static BufferedImage Borderln = load("src/imgs/Map/TempLine.png");
 	public static BufferedImage Corner = load("src/imgs/Map/TempCorner.png");
 	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
-    private static tst t = new tst();
+    private static DummyFrame t = new DummyFrame();
 	public static int getScaleBy(Controller C)
 	{
 		if (t.width > t.height)

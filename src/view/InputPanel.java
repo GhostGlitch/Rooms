@@ -50,6 +50,6 @@ public class InputPanel extends JPanel
 
 	public void resizeTxtFld()
 	{
-		txtFld.setBounds(img.getScaleBy(c), 0, getWidth() - (img.getScaleBy(c) * 2), getHeight() - img.getScaleBy(c));
+		txtFld.setBounds(Img.getScaleBy(c), 0, getWidth() - (Img.getScaleBy(c) * 2), getHeight() - Img.getScaleBy(c));
 	}
 }

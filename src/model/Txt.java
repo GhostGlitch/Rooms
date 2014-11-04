@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Txt
 {
 	private ArrayList<String> cmdList;
+	private ArrayList<String> goList;
+
 	private boolean lengthChecker(String input)
 	{
 		boolean isLong = false;
@@ -12,26 +14,19 @@ public class Txt
 			isLong = true;
 		return isLong;
 	}
-	private boolean dieChecker(String input)
-	{
-		boolean isDie = false;
-		if (input.contains("die"))
-			isDie = true;
-		return isDie;
-	}
 
-	private void fillCmdList()
+	private void fillLists()
 	{
 		cmdList.add("die");
 		cmdList.add("go");
-		cmdList.add("go north");
-		cmdList.add("go south");
-		cmdList.add("go east");
-		cmdList.add("go west");
-		cmdList.add("go up");
-		cmdList.add("go down");
-		cmdList.add("go left");
-		cmdList.add("go right");
+		goList.add("north");
+		goList.add("south");
+		goList.add("east");
+		goList.add("west");
+		goList.add("up");
+		goList.add("down");
+		goList.add("left");
+		goList.add("right");
 		cmdList.add("sleep");
 		cmdList.add("attack");
 		cmdList.add("help");
@@ -41,7 +36,7 @@ public class Txt
 
 	private String cmdChecker(String Input)
 	{
-		String cmd;
+		String cmd = null;
 		for (String currentCmd : cmdList)
 		{
 			cmd = currentCmd;

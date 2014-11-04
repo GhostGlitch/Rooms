@@ -15,58 +15,67 @@ public class Layout
 	 * The lowest value a room is allowed to generate at. Must be greater than
 	 * 0.
 	 */
-	private int GenMin = 0;
+	private int genMin = 0;
 	/**
 	 * The highest value a room is allowed to generate at. Must be greater than
 	 * GenMin.
 	 */
-	private int GenMax = 15;
+	private int genMax = 15;
 	/**
 	 * The X and Y coordinates of the start room.
 	 */
-	private int GenCent = 7;
+	private int genCent = 7;
 	/**
 	 * The Chance a room has to generate if it has 1 room adjacent to it.
 	 */
-	double RoomChance1 = .25;
+	private double roomChance1 = .25;
 	/**
 	 * The Chance a room has to generate if it has 2 room adjacent to it.
 	 */
-	double RoomChance2 = .025;
+	private double roomChance2 = .025;
 	/**
 	 * The Chance a room has to generate if it has 3 room adjacent to it.
 	 */
-	double RoomChance3 = .0125;
+	private double roomChance3 = .0125;
 	/**
 	 * The Chance a room has to generate if it has 4 room adjacent to it.
 	 */
-	double RoomChance4 = .00005;
-	double MinRmPercent = 0.25;
-	double MaxRmPercent = 0.40;
-	double RanRoomAmount = RanDouble(MinRmPercent, MaxRmPercent);
+	private double roomChance4 = .00005;
+	/**
+	 * The minimum percent of rooms possible
+	 */
+	private double minRmPercent = 0.25;
+	/**
+	 * The maximum percent of rooms possible
+	 */
+	private double maxRmPercent = 0.40;
+	/**
+	 * Random number in the range of possible room amounts
+	 */
+	private double ranRoomAmount = RanDouble(minRmPercent, maxRmPercent);
 	/**
 	 * The least rooms allowed to generate.
 	 */
-	int MinRooms = (int) Math.round(Math.pow(GenMax - GenMin, 2) * RanRoomAmount);
+	private int minRooms = (int) Math.round(Math.pow(genMax - genMin, 2) * ranRoomAmount);
 	/**
 	 * The most rooms allowed to generate.
 	 */
-	int MaxRooms = MinRooms + 1;
+	private int maxRooms = minRooms + 1;
 	/**
 	 * Where rooms are and aren't.
 	 */
-	boolean[][] Layout = new boolean[GenMax][GenMax];
+	private boolean[][] layout = new boolean[genMax][genMax];
 	/**
 	 * A dummy of Layout
 	 * 
 	 * @see Layout
 	 */
-	boolean[][] Dummy = new boolean[GenMax][GenMax];
+	private boolean[][] dummy = new boolean[genMax][genMax];
 
-	private double RanDouble(double Min, double Max)
+	private double RanDouble(double min, double max)
 	{
 		Random rand = new Random();
-		return Min + (Max - Min) * rand.nextDouble();
+		return min + (max - min) * rand.nextDouble();
 	}
 
 	/**
@@ -74,40 +83,40 @@ public class Layout
 	 */
 	public Layout(Controller c)
 	{
-		Layout[GenCent][GenCent] = true;
-		Dummy[GenCent][GenCent] = true;
-		while (RoomCount() < MinRooms || RoomCount() > MaxRooms)
+		layout[genCent][genCent] = true;
+		dummy[genCent][genCent] = true;
+		while (RoomCount() < minRooms || RoomCount() > maxRooms)
 		{
-			while (RoomCount() < MinRooms)
+			while (RoomCount() < minRooms)
 			{
-				for (int index = GenMin; index < GenMax; index++)
+				for (int index = genMin; index < genMax; index++)
 				{
 
-					for (int index1 = GenMin; index1 < GenMax; index1++)
+					for (int index1 = genMin; index1 < genMax; index1++)
 					{
 
-						if (!(Layout[index][index1]))
+						if (!(layout[index][index1]))
 						{
-							Dummy[index][index1] = getSurroundingBool(index, index1);
+							dummy[index][index1] = getSurrounding(index, index1);
 						}
 					}
 				}
-				for (int index = GenMin; index < GenMax; index++)
+				for (int index = genMin; index < genMax; index++)
 				{
-					for (int index1 = GenMin; index1 < GenMax; index1++)
+					for (int index1 = genMin; index1 < genMax; index1++)
 					{
-						Layout[index][index1] = Dummy[index][index1];
+						layout[index][index1] = dummy[index][index1];
 					}
 				}
 			}
-			while (RoomCount() > MaxRooms)
+			while (RoomCount() > maxRooms)
 			{
 				int index = RanInt();
 				int index1 = RanInt();
 				if (c.edgeTest(this, index, index1))
 				{
-					Dummy[index][index1] = false;
-					Layout[index][index1] = false;
+					dummy[index][index1] = false;
+					layout[index][index1] = false;
 				}
 			}
 		}
@@ -121,11 +130,11 @@ public class Layout
 	public int RoomCount()
 	{
 		int roomCount = 0;
-		for (int index = GenMin; index < GenMax; index++)
+		for (int index = genMin; index < genMax; index++)
 		{
-			for (int index1 = GenMin; index1 < GenMax; index1++)
+			for (int index1 = genMin; index1 < genMax; index1++)
 			{
-				if (Layout[index][index1])
+				if (layout[index][index1])
 				{
 					roomCount++;
 				}
@@ -142,55 +151,55 @@ public class Layout
 	 *            the first part of the room's coordinates.
 	 * @param index1
 	 *            the second part of the room's coordinates.
-	 * @return a boolean based on the adjacent rooms.
+	 * @return if the room may be set
 	 */
-	private boolean getSurroundingBool(int index, int index1)
+	private boolean getSurrounding(int index, int index1)
 	{
-		int roomCount = 0;
+		int roomNum = 0;
 		double percent = 0;
-		if (index < GenMax - 1)
+		if (index < genMax - 1)
 		{
-			if (Layout[index + 1][index1])
+			if (layout[index + 1][index1])
 			{
-				roomCount = roomCount + 1;
+				roomNum = roomNum + 1;
 			}
 		}
-		if (index > GenMin)
+		if (index > genMin)
 		{
-			if (Layout[index - 1][index1])
+			if (layout[index - 1][index1])
 			{
-				roomCount = roomCount + 1;
+				roomNum = roomNum + 1;
 			}
 		}
-		if (index1 < GenMax - 1)
+		if (index1 < genMax - 1)
 		{
-			if (Layout[index][index1 + 1])
+			if (layout[index][index1 + 1])
 			{
-				roomCount = roomCount + 1;
+				roomNum = roomNum + 1;
 			}
 		}
-		if (index1 > GenMin)
+		if (index1 > genMin)
 		{
-			if (Layout[index][index1 - 1])
+			if (layout[index][index1 - 1])
 			{
-				roomCount = roomCount + 1;
+				roomNum = roomNum + 1;
 			}
 		}
-		if (roomCount == 1)
+		if (roomNum == 1)
 		{
-			percent = RoomChance1;
+			percent = roomChance1;
 		}
-		else if (roomCount == 2)
+		else if (roomNum == 2)
 		{
-			percent = RoomChance2;
+			percent = roomChance2;
 		}
-		else if (roomCount == 3)
+		else if (roomNum == 3)
 		{
-			percent = RoomChance3;
+			percent = roomChance3;
 		}
-		else if (roomCount == 4)
+		else if (roomNum == 4)
 		{
-			percent = RoomChance4;
+			percent = roomChance4;
 		}
 		else
 		{
@@ -199,10 +208,15 @@ public class Layout
 		return Math.random() < percent;
 	}
 
+	/**
+	 * creates a random Integer between GenMin and GenMax
+	 * 
+	 * @return random Integer between GenMin and GenMax
+	 */
 	private int RanInt()
 	{
 		Random rand = new Random();
-		return rand.nextInt((GenMax - GenMin)) + GenMin;
+		return rand.nextInt((genMax - genMin)) + genMin;
 	}
 
 	/**
@@ -212,18 +226,7 @@ public class Layout
 	 */
 	public int getGenMin()
 	{
-		return GenMin;
-	}
-
-	/**
-	 * Setter for GenMin
-	 * 
-	 * @param genMin
-	 *            the new GenMin value
-	 */
-	public void setGenMin(int genMin)
-	{
-		GenMin = genMin;
+		return genMin;
 	}
 
 	/**
@@ -233,18 +236,7 @@ public class Layout
 	 */
 	public int getGenMax()
 	{
-		return GenMax;
-	}
-
-	/**
-	 * Setter for GenMax
-	 * 
-	 * @param genMax
-	 *            the new value for GenMax
-	 */
-	public void setGenMax(int genMax)
-	{
-		GenMax = genMax;
+		return genMax;
 	}
 
 	/**
@@ -254,18 +246,7 @@ public class Layout
 	 */
 	public boolean[][] get()
 	{
-		return Layout;
-	}
-
-	/**
-	 * Setter for array Layout
-	 * 
-	 * @param layout
-	 *            new value for Layout
-	 */
-	public void setLayout(boolean[][] layout)
-	{
-		Layout = layout;
+		return layout;
 	}
 
 	/**
@@ -275,17 +256,6 @@ public class Layout
 	 */
 	public int getGenCent()
 	{
-		return GenCent;
-	}
-
-	/**
-	 * Setter for GenCent
-	 * 
-	 * @param genCent
-	 *            the new value for GenCent
-	 */
-	public void setGenCent(int genCent)
-	{
-		GenCent = genCent;
+		return genCent;
 	}
 }

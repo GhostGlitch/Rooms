@@ -2,11 +2,11 @@ package view;
 
 import javax.swing.JFrame;
 
-public class tst extends JFrame
+public class DummyFrame extends JFrame
 {
 	int width;
 	int height;
-	public tst()
+	public DummyFrame()
 	{
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		setVisible(true);

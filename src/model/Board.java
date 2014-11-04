@@ -2,39 +2,32 @@ package model;
 
 import java.util.Random;
 
-import controller.Controller;
-
 public class Board
 {
 	int index;
 	int index1;
 	boolean isEdge = false;
-	int[][] Board;
+	int[][] board;
 	double roomsPerTreasure = 10;
 	double roomsPerBoss = 20;
 
 	public Board(Layout setup)
 	{
-		Board = new int[setup.getGenMax()][setup.getGenMax()];
+		board = new int[setup.getGenMax()][setup.getGenMax()];
 		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
 		{
 			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
 			{
 				if (setup.get()[index][index1])
 				{
-					Board[index][index1] = 0;
+					board[index][index1] = 0;
 				}
 				else
 				{
-					Board[index][index1] = -1;
+					board[index][index1] = -1;
 				}
 			}
 		}
-		/*
-		 * while (!isEdge) { index = RanInt(setup); index1 = RanInt(setup);
-		 * EdgeTest(setup); System.out.println(index + " " + index1);
-		 * System.out.println(isEdge); }
-		 */
 		isEdge = false;
 		if (roomsPerTreasure > setup.RoomCount())
 		{
@@ -45,7 +38,7 @@ public class Board
 				EdgeTest(setup);
 			}
 			isEdge = false;
-			Board[index][index1] = Board[index][index1] + 1;
+			board[index][index1] = board[index][index1] + 1;
 		}
 
 		else
@@ -59,7 +52,7 @@ public class Board
 					EdgeTest(setup);
 				}
 				isEdge = false;
-				Board[index][index1] = Board[index][index1] + 1;
+				board[index][index1] = board[index][index1] + 1;
 			}
 		}
 		if (roomsPerBoss > setup.RoomCount())
@@ -71,7 +64,7 @@ public class Board
 				EdgeTest(setup);
 			}
 			isEdge = false;
-			Board[index][index1] = Board[index][index1] + 10;
+			board[index][index1] = board[index][index1] + 10;
 		}
 
 		else
@@ -85,7 +78,7 @@ public class Board
 					EdgeTest(setup);
 				}
 				isEdge = false;
-				Board[index][index1] = Board[index][index1] + 10;
+				board[index][index1] = board[index][index1] + 10;
 			}
 		}
 	}
@@ -98,7 +91,7 @@ public class Board
 
 	public int[][] get()
 	{
-		return Board;
+		return board;
 	}
 
 	boolean EdgeTest(Layout setup)
