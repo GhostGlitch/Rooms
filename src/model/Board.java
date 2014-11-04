@@ -2,23 +2,53 @@ package model;
 
 import java.util.Random;
 
+import controller.Controller;
+
+/**
+ * Generates what rooms are.
+ * 
+ * @author GhostGlitch
+ */
 public class Board
 {
-	int index;
-	int index1;
-	boolean isEdge = false;
-	int[][] board;
-	double roomsPerTreasure = 10;
-	double roomsPerBoss = 20;
+	/**
+	 * The first part of a room's coordinates
+	 */
+	private int index;
+	/**
+	 * The second part of a room's coordinates
+	 */
+	private int index1;
+	/**
+	 * Whether or not a room is an edge
+	 */
+	private boolean isEdge = false;
+	/**
+	 * What Rooms are
+	 */
+	private int[][] board;
+	/**
+	 * How many rooms are required for a treasure
+	 */
+	private double roomsPerTreasure = 10;
+	/**
+	 * How many rooms are required for a boss
+	 */
+	private double roomsPerBoss = 20;
+	Controller c;
 
-	public Board(Layout setup)
+	/**
+	 * Generates what rooms are.
+	 */
+	public Board(Controller c)
 	{
-		board = new int[setup.getGenMax()][setup.getGenMax()];
-		for (int index = setup.getGenMin(); index < setup.getGenMax(); index++)
+		this.c = c;
+		board = new int[c.layout.getGenMax()][c.layout.getGenMax()];
+		for (int index = c.layout.getGenMin(); index < c.layout.getGenMax(); index++)
 		{
-			for (int index1 = setup.getGenMin(); index1 < setup.getGenMax(); index1++)
+			for (int index1 = c.layout.getGenMin(); index1 < c.layout.getGenMax(); index1++)
 			{
-				if (setup.get()[index][index1])
+				if (c.layout.get()[index][index1])
 				{
 					board[index][index1] = 0;
 				}
@@ -29,13 +59,13 @@ public class Board
 			}
 		}
 		isEdge = false;
-		if (roomsPerTreasure > setup.RoomCount())
+		if (roomsPerTreasure > c.layout.RoomCount())
 		{
 			while (!isEdge)
 			{
-				index = RanInt(setup);
-				index1 = RanInt(setup);
-				EdgeTest(setup);
+				index = c.layout.RanInt();
+				index1 = c.layout.RanInt();
+				testEdge();
 			}
 			isEdge = false;
 			board[index][index1] = board[index][index1] + 1;
@@ -43,25 +73,25 @@ public class Board
 
 		else
 		{
-			for (int treasure = 0; treasure != (Math.floor(setup.RoomCount() / roomsPerTreasure)); treasure++)
+			for (int treasure = 0; treasure != (Math.floor(c.layout.RoomCount() / roomsPerTreasure)); treasure++)
 			{
 				while (!isEdge)
 				{
-					index = RanInt(setup);
-					index1 = RanInt(setup);
-					EdgeTest(setup);
+					index = c.layout.RanInt();
+					index1 = c.layout.RanInt();
+					testEdge();
 				}
 				isEdge = false;
 				board[index][index1] = board[index][index1] + 1;
 			}
 		}
-		if (roomsPerBoss > setup.RoomCount())
+		if (roomsPerBoss > c.layout.RoomCount())
 		{
 			while (!isEdge)
 			{
-				index = RanInt(setup);
-				index1 = RanInt(setup);
-				EdgeTest(setup);
+				index = c.layout.RanInt();
+				index1 = c.layout.RanInt();
+				testEdge();
 			}
 			isEdge = false;
 			board[index][index1] = board[index][index1] + 10;
@@ -69,13 +99,13 @@ public class Board
 
 		else
 		{
-			for (int boss = 0; boss != (Math.floor(setup.RoomCount() / roomsPerBoss)); boss++)
+			for (int boss = 0; boss != (Math.floor(c.layout.RoomCount() / roomsPerBoss)); boss++)
 			{
 				while (!isEdge)
 				{
-					index = RanInt(setup);
-					index1 = RanInt(setup);
-					EdgeTest(setup);
+					index = c.layout.RanInt();
+					index1 = c.layout.RanInt();
+					testEdge();
 				}
 				isEdge = false;
 				board[index][index1] = board[index][index1] + 10;
@@ -83,78 +113,66 @@ public class Board
 		}
 	}
 
-	private int RanInt(Layout setup)
-	{
-		Random rand = new Random();
-		return rand.nextInt((setup.getGenMax() - setup.getGenMin())) + setup.getGenMin();
-	}
-
+	/**
+	 * Getter for the board
+	 * 
+	 * @return board
+	 */
 	public int[][] get()
 	{
 		return board;
 	}
 
-	boolean EdgeTest(Layout setup)
+	/**
+	 * Checks if any room is an edge. Slightly different than that of Layout
+	 * 
+	 * @return if the room is an edge
+	 */
+	private boolean testEdge()
 	{
 		isEdge = false;
-		if (setup.get()[index][index1] && !(index == setup.getGenCent() && index1 == setup.getGenCent()))
+		if (c.layout.get()[index][index1] && !(index == c.layout.getGenCent() && index1 == c.layout.getGenCent()))
 		{
-			if (index != setup.getGenMin() && index1 != setup.getGenMin()
-					&& (index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
-					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
-					&& setup.get()[index - 1][index1 - 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 - 1])
-			{
+			if (index != c.layout.getGenMin() && index1 != c.layout.getGenMin()
+					&& (index == c.layout.getGenMax() - 1 || !c.layout.get()[index + 1][index1])
+					&& (index1 == c.layout.getGenMax() - 1 || !c.layout.get()[index][index1 + 1])
+					&& c.layout.get()[index - 1][index1 - 1] && c.layout.get()[index - 1][index1] && c.layout.get()[index][index1 - 1])
 				isEdge = true;
-			}
-			else if (index != setup.getGenMin() && index1 != setup.getGenMax() - 1
-					&& (index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
-					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1])
-					&& setup.get()[index - 1][index1 + 1] && setup.get()[index - 1][index1] && setup.get()[index][index1 + 1])
-			{
+			else if (index != c.layout.getGenMin() && index1 != c.layout.getGenMax() - 1
+					&& (index == c.layout.getGenMax() - 1 || !c.layout.get()[index + 1][index1])
+					&& (index1 == c.layout.getGenMin() || !c.layout.get()[index][index1 - 1])
+					&& c.layout.get()[index - 1][index1 + 1] && c.layout.get()[index - 1][index1] && c.layout.get()[index][index1 + 1])
 				isEdge = true;
-			}
-			else if (index != setup.getGenMax() - 1 && index1 != setup.getGenMin()
-					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
-					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
-					&& setup.get()[index + 1][index1 - 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 - 1])
-			{
+			else if (index != c.layout.getGenMax() - 1 && index1 != c.layout.getGenMin()
+					&& (index == c.layout.getGenMin() || !c.layout.get()[index - 1][index1])
+					&& (index1 == c.layout.getGenMax() - 1 || !c.layout.get()[index][index1 + 1])
+					&& c.layout.get()[index + 1][index1 - 1] && c.layout.get()[index + 1][index1] && c.layout.get()[index][index1 - 1])
 				isEdge = true;
-			}
-			else if (index != setup.getGenMax() - 1 && index1 != setup.getGenMax() - 1
-					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
-					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1])
-					&& setup.get()[index + 1][index1 + 1] && setup.get()[index + 1][index1] && setup.get()[index][index1 + 1])
-			{
+			else if (index != c.layout.getGenMax() - 1 && index1 != c.layout.getGenMax() - 1
+					&& (index == c.layout.getGenMin() || !c.layout.get()[index - 1][index1])
+					&& (index1 == c.layout.getGenMin() || !c.layout.get()[index][index1 - 1])
+					&& c.layout.get()[index + 1][index1 + 1] && c.layout.get()[index + 1][index1] && c.layout.get()[index][index1 + 1])
 				isEdge = true;
-			}
-			else if ((index != setup.getGenMax() - 1 && setup.get()[index + 1][index1])
-					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
-					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
-					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
-			{
+			else if ((index != c.layout.getGenMax() - 1 && c.layout.get()[index + 1][index1])
+					&& (index == c.layout.getGenMin() || !c.layout.get()[index - 1][index1])
+					&& (index1 == c.layout.getGenMax() - 1 || !c.layout.get()[index][index1 + 1])
+					&& (index1 == c.layout.getGenMin() || !c.layout.get()[index][index1 - 1]))
 				isEdge = true;
-			}
-			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
-					&& (index != setup.getGenMin() && setup.get()[index - 1][index1])
-					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
-					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
-			{
+			else if ((index == c.layout.getGenMax() - 1 || !c.layout.get()[index + 1][index1])
+					&& (index != c.layout.getGenMin() && c.layout.get()[index - 1][index1])
+					&& (index1 == c.layout.getGenMax() - 1 || !c.layout.get()[index][index1 + 1])
+					&& (index1 == c.layout.getGenMin() || !c.layout.get()[index][index1 - 1]))
 				isEdge = true;
-			}
-			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
-					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
-					&& (index1 != setup.getGenMax() - 1 && setup.get()[index][index1 + 1])
-					&& (index1 == setup.getGenMin() || !setup.get()[index][index1 - 1]))
-			{
+			else if ((index == c.layout.getGenMax() - 1 || !c.layout.get()[index + 1][index1])
+					&& (index == c.layout.getGenMin() || !c.layout.get()[index - 1][index1])
+					&& (index1 != c.layout.getGenMax() - 1 && c.layout.get()[index][index1 + 1])
+					&& (index1 == c.layout.getGenMin() || !c.layout.get()[index][index1 - 1]))
 				isEdge = true;
-			}
-			else if ((index == setup.getGenMax() - 1 || !setup.get()[index + 1][index1])
-					&& (index == setup.getGenMin() || !setup.get()[index - 1][index1])
-					&& (index1 == setup.getGenMax() - 1 || !setup.get()[index][index1 + 1])
-					&& (index1 != setup.getGenMin() && setup.get()[index][index1 - 1]))
-			{
+			else if ((index == c.layout.getGenMax() - 1 || !c.layout.get()[index + 1][index1])
+					&& (index == c.layout.getGenMin() || !c.layout.get()[index - 1][index1])
+					&& (index1 == c.layout.getGenMax() - 1 || !c.layout.get()[index][index1 + 1])
+					&& (index1 != c.layout.getGenMin() && c.layout.get()[index][index1 - 1]))
 				isEdge = true;
-			}
 		}
 		return isEdge;
 	}

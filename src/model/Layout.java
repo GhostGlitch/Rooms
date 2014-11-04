@@ -5,7 +5,7 @@ import java.util.Random;
 import controller.Controller;
 
 /**
- * Generates where the rooms are
+ * Generates where the rooms are.
  * 
  * @authors GhostGlitch & Narpas-Sword
  */
@@ -18,7 +18,7 @@ public class Layout
 	private int genMin = 0;
 	/**
 	 * The highest value a room is allowed to generate at. Must be greater than
-	 * GenMin.
+	 * genMin.
 	 */
 	private int genMax = 15;
 	/**
@@ -62,7 +62,7 @@ public class Layout
 	 */
 	private int maxRooms = minRooms + 1;
 	/**
-	 * Where rooms are and aren't.
+	 * Where rooms are
 	 */
 	private boolean[][] layout = new boolean[genMax][genMax];
 	/**
@@ -81,7 +81,7 @@ public class Layout
 	/**
 	 * Generates a new layout of rooms.
 	 */
-	public Layout(Controller c)
+	public Layout()
 	{
 		layout[genCent][genCent] = true;
 		dummy[genCent][genCent] = true;
@@ -113,7 +113,7 @@ public class Layout
 			{
 				int index = RanInt();
 				int index1 = RanInt();
-				if (c.edgeTest(this, index, index1))
+				if (testEdge(index, index1))
 				{
 					dummy[index][index1] = false;
 					layout[index][index1] = false;
@@ -209,20 +209,90 @@ public class Layout
 	}
 
 	/**
-	 * creates a random Integer between GenMin and GenMax
+	 * creates a random Integer between genMin and genMax
 	 * 
-	 * @return random Integer between GenMin and GenMax
+	 * @return random Integer between genMin and genMax
 	 */
-	private int RanInt()
+	int RanInt()
 	{
 		Random rand = new Random();
 		return rand.nextInt((genMax - genMin)) + genMin;
 	}
 
 	/**
-	 * Getter for GenMin
+	 * Checks if any room is an edge.
 	 * 
-	 * @return GenMin
+	 * @param index
+	 *            the first part of a room's coordinates.
+	 * @param index1
+	 *            the second part of a room's coordinates.
+	 * @return if the room is an edge
+	 */
+	public boolean testEdge(int index, int index1)
+	{
+		boolean isEdge = false;
+		if (layout[index][index1] && !(index == genCent && index1 == genCent))
+		{
+			if (index != genMin && index1 != genMin
+					&& (index == genMax - 1 || !layout[index + 1][index1])
+					&& (index1 == genMax - 1 || !layout[index][index1 + 1])
+					&& layout[index - 1][index1 - 1] && layout[index - 1][index1] && layout[index][index1 - 1])
+				isEdge = true;
+			else if (index != genMin && index1 != genMax - 1
+					&& (index == genMax - 1 || !layout[index + 1][index1])
+					&& (index1 == genMin || !layout[index][index1 - 1])
+					&& layout[index - 1][index1 + 1] && layout[index - 1][index1] && layout[index][index1 + 1])
+				isEdge = true;
+			else if (index != genMax - 1 && index1 != genMin
+					&& (index == genMin || !layout[index - 1][index1])
+					&& (index1 == genMax - 1 || !layout[index][index1 + 1])
+					&& layout[index + 1][index1 - 1] && layout[index + 1][index1] && layout[index][index1 - 1])
+				isEdge = true;
+			else if (index != genMax - 1 && index1 != genMax - 1
+					&& (index == genMin || !layout[index - 1][index1])
+					&& (index1 == genMin || !layout[index][index1 - 1])
+					&& layout[index + 1][index1 + 1] && layout[index + 1][index1] && layout[index][index1 + 1])
+				isEdge = true;
+			else if ((index != genMax - 1 && layout[index + 1][index1])
+					&& (index == genMin || !layout[index - 1][index1])
+					&& (index1 == genMax - 1 || !layout[index][index1 + 1])
+					&& (index1 == genMin || !layout[index][index1 - 1]))
+				isEdge = true;
+			else if ((index == genMax - 1 || !layout[index + 1][index1])
+					&& (index != genMin && layout[index - 1][index1])
+					&& (index1 == genMax - 1 || !layout[index][index1 + 1])
+					&& (index1 == genMin || !layout[index][index1 - 1]))
+				isEdge = true;
+			else if ((index == genMax - 1 || !layout[index + 1][index1])
+					&& (index == genMin || !layout[index - 1][index1])
+					&& (index1 != genMax - 1 && layout[index][index1 + 1])
+					&& (index1 == genMin || !layout[index][index1 - 1]))
+				isEdge = true;
+			else if ((index == genMax - 1 || !layout[index + 1][index1])
+					&& (index == genMin || !layout[index - 1][index1])
+					&& (index1 == genMax - 1 || !layout[index][index1 + 1])
+					&& (index1 != genMin && layout[index][index1 - 1]))
+				isEdge = true;
+			else if (index != genMin && index1 != genMin && index != genMax - 1 && index1 != genMax - 1 && !layout[index + 1][index1] && layout[index - 1][index1 - 1]
+					&& layout[index - 1][index1] && layout[index][index1 - 1] && layout[index - 1][index1 + 1] && layout[index][index1 + 1])
+				isEdge = true;
+			else if (index != genMin && index1 != genMin && index != genMax - 1 && index1 != genMax - 1 && !layout[index - 1][index1] && layout[index + 1][index1 + 1]
+					&& layout[index + 1][index1] && layout[index][index1 + 1] && layout[index + 1][index1 - 1] && layout[index][index1 - 1])
+				isEdge = true;
+			else if (index != genMin && index1 != genMin && index != genMax - 1 && index1 != genMax - 1 && !layout[index][index1 - 1] && layout[index + 1][index1 + 1]
+					&& layout[index + 1][index1] && layout[index][index1 + 1] && layout[index - 1][index1 + 1] && layout[index - 1][index1])
+				isEdge = true;
+			else if (index != genMin && index1 != genMin && index != genMax - 1 && index1 != genMax - 1 && !layout[index][index1 + 1] && layout[index - 1][index1 - 1]
+					&& layout[index - 1][index1] && layout[index][index1 - 1] && layout[index + 1][index1 - 1] && layout[index + 1][index1])
+				isEdge = true;
+		}
+		return isEdge;
+	}
+
+	/**
+	 * Getter for genMin
+	 * 
+	 * @return genMin
 	 */
 	public int getGenMin()
 	{
@@ -230,9 +300,9 @@ public class Layout
 	}
 
 	/**
-	 * Getter for GenMax
+	 * Getter for genMax
 	 * 
-	 * @return GenMax
+	 * @return genMax
 	 */
 	public int getGenMax()
 	{
@@ -250,9 +320,9 @@ public class Layout
 	}
 
 	/**
-	 * Getter for GenCent
+	 * Getter for genCent
 	 * 
-	 * @return GenCent
+	 * @return genCent
 	 */
 	public int getGenCent()
 	{
