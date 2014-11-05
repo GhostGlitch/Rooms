@@ -45,7 +45,7 @@ public class Layout
 	 * The minimum percent of rooms possible
 	 */
 	private double minRmPercent = 0.25;
-	/**
+	/**.0
 	 * The maximum percent of rooms possible
 	 */
 	private double maxRmPercent = 0.40;

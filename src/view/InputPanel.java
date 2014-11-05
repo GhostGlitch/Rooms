@@ -39,11 +39,12 @@ public class InputPanel extends JPanel
 	{
 		txtFld.addActionListener(new ActionListener()
 		{
-
+			
 			public void actionPerformed(ActionEvent Enter)
 			{
 				String txtFldVal = txtFld.getText();
 				txtFld.setText(null);
+					System.out.println(c.txt.checkCmd(txtFldVal));
 			}
 		});
 	}

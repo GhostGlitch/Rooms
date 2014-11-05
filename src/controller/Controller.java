@@ -14,6 +14,7 @@ public class Controller
 	 */
 	public Layout layout;
 	public Board board;
+	public Txt txt;
 	/**
 	 * Constructor for Controller
 	 */
@@ -21,6 +22,7 @@ public class Controller
 	{
 		layout = new Layout();
 		board = new Board(this);
+		txt = new Txt();
 		new RoomFrame(this);
 	}
 }
