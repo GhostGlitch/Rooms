@@ -36,26 +36,38 @@ public class Txt
 
 	public String checkCmd(String input)
 	{
+		input = cleanCmd(input);
 		String cmd = null;
-		int i = -1;
+		System.out.println(input);
 		for (int index = 0; index < cmdLst.size(); index++)
 		{
-			//System.out.println(index + ": " + cmdLst.get(index));
-			if (input.matches("\\b" + cmdLst.get(index) + "\\b.*"))
+			if (input.matches(cmdLst.get(index) + "\\b.*"))
 				cmd = cmdLst.get(index);
-				//i = index;
 		}
+		
 		if (cmd == "go")
 		{
 			for (int index = 0; index < goLst.size(); index++)
 			{
-				//System.out.println(index + ": " + goLst.get(index));
-				if (input.matches(cmd + " \\b" + goLst.get(index) + "$"))
-					cmd = input;
+				if (input.matches(cmd + "\\s+\\b" + goLst.get(index) + "$"))
+						cmd=input;
 			}
 		}
-			//System.out.print(i + ": ");
-			return cmd;
-
+		return cmd;
+	}
+	private String cleanCmd(String input)
+	{
+		input = input.replaceAll("\\s+", " ");
+		input = input.trim();
+		if (input.matches("^([/]).*"))
+		{
+			input = input.substring(1, input.length());
+		}
+		input = input.trim();
+		while (input.matches(".*[.!? ]$"))
+		{
+			input = input.substring(0, input.length()-1);
+		}
+		return input;
 	}
 }
