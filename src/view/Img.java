@@ -26,15 +26,16 @@ public class Img
 	public static BufferedImage Corner = load("src/imgs/Map/TempCorner.png");
 	public static BufferedImage Spacer = load("src/imgs/Other/Spacer.png");
     private static DummyFrame d = new DummyFrame();
-	public static int getScaleBy(Controller C)
+    
+	public static int getScaleBy(Controller c)
 	{
 		if (d.width > d.height)
 		{
-			return (int) (d.height / (3 * (C.layout.getGenMax() + 3.6666)));
+			return (int) (d.height / (3 * (c.layout.getGenMax() - c.layout.getGenMin() + 3.6666)));
 		}
 		else
 		{
-			return (d.width / (3 * (C.layout.getGenMax() + 2)));
+			return (d.width / (3 * (c.layout.getGenMax() - c.layout.getGenMin() + 2)));
 		}
 	}
 

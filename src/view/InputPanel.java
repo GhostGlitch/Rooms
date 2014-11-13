@@ -18,38 +18,45 @@ public class InputPanel extends JPanel
 
 	public InputPanel(Controller c)
 	{
-		this.c=c;
-		Font font = Img.pixFont("Arial", Font.PLAIN, Img.getScaleBy(c) * 3);
-		setLayout(null);
+		this.c = c;
+
 		txtFld = new JTextField();
-		txtFld.setBounds(10, 11, 20, Img.Empty.getGraphics().getFontMetrics(font).getHeight());
-		setSize(0, txtFld.getHeight() + (Img.getScaleBy(c) * 2));
-		setOpaque(false);
-		txtFld.setFont(font);
-		txtFld.setBorder(new EmptyBorder(0, Img.getScaleBy(c)/2, 0, Img.getScaleBy(c)/2));
+
+
+		txtFld.setBorder(new EmptyBorder(0, Img.getScaleBy(c) / 2, 0, Img.getScaleBy(c) / 2));
 		txtFld.setForeground(new Color(185, 194, 198));
 		txtFld.setBackground(Color.BLACK);
 		txtFld.setCaretColor(new Color(185, 194, 198));
-		add(txtFld);
+		setupPanel();
+		setupLayout();
 		setupListeners();
+	}
+
+	private void setupLayout()
+	{
+		setBounds(0, (c.layout.getGenMax() + 2) * Img.getScaleBy(c) * 3, (c.layout.getGenMax() + 2) * Img.getScaleBy(c) * 3, Img.Empty.getGraphics().getFontMetrics(font).getHeight() + (Img.getScaleBy(c) * 2));
+		txtFld.setBounds(Img.getScaleBy(c), 0, getWidth() - (Img.getScaleBy(c) * 2), getHeight() - Img.getScaleBy(c));
+	}
+
+	private void setupPanel()
+	{
+		Font font = Img.pixFont("Arial", Font.PLAIN, Img.getScaleBy(c) * 2);
+		txtFld.setFont(font);
+		setLayout(null);
+		add(txtFld);
 	}
 
 	private void setupListeners()
 	{
 		txtFld.addActionListener(new ActionListener()
 		{
-			
+
 			public void actionPerformed(ActionEvent Enter)
 			{
 				String txtFldVal = txtFld.getText();
 				txtFld.setText(null);
-					System.out.println(c.txt.checkCmd(txtFldVal));
+				System.out.println(c.txt.checkCmd(txtFldVal));
 			}
 		});
-	}
-
-	public void resizeTxtFld()
-	{
-		txtFld.setBounds(Img.getScaleBy(c), 0, getWidth() - (Img.getScaleBy(c) * 2), getHeight() - Img.getScaleBy(c));
 	}
 }

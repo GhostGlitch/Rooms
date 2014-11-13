@@ -26,8 +26,6 @@ public class CombinePanel extends JPanel
 	{
 		setLayout(null);
 		map.setSize(map.getPreferredSize());
-		input.setBounds(0, 0 + map.getHeight(), map.getWidth(), input.getHeight());
-		input.resizeTxtFld();
 		output.setBounds(0, 0 + map.getHeight() + input.getHeight(), map.getWidth(), output.getHeight());
 		output.resizeTxtPane();
 	}

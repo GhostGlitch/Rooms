@@ -38,7 +38,6 @@ public class Txt
 	{
 		input = cleanCmd(input);
 		String cmd = null;
-		System.out.println(input);
 		for (int index = 0; index < cmdLst.size(); index++)
 		{
 			if (input.matches(cmdLst.get(index) + "\\b.*"))
@@ -59,7 +58,7 @@ public class Txt
 	{
 		input = input.replaceAll("\\s+", " ");
 		input = input.trim();
-		if (input.matches("^([/]).*"))
+		if (input.matches("^([/\\\\]).*"))
 		{
 			input = input.substring(1, input.length());
 		}
