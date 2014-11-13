@@ -13,7 +13,6 @@ import controller.Controller;
 
 public class InputPanel extends JPanel
 {
-	Img img = new Img();
 	private JTextField txtFld;
 	private Controller c;
 
