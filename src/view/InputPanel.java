@@ -11,8 +11,10 @@ import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
 
+
 public class InputPanel extends JPanel
 {
+	Font font;
 	private JTextField txtFld;
 	private Controller c;
 
@@ -40,7 +42,8 @@ public class InputPanel extends JPanel
 
 	private void setupPanel()
 	{
-		Font font = Img.pixFont("Arial", Font.PLAIN, Img.getScaleBy(c) * 2);
+		setOpaque(false);
+		font = Img.pixFont("Arial", Font.PLAIN, Img.getScaleBy(c) * 2);
 		txtFld.setFont(font);
 		setLayout(null);
 		add(txtFld);

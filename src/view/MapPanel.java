@@ -1,11 +1,20 @@
 package view;
 
+import static view.Img.Borderln;
+import static view.Img.Corner;
+import static view.Img.Empty;
+import static view.Img.Room;
+import static view.Img.getScaleBy;
+import static view.Img.rotate;
+import static view.Img.scale;
+import static view.Img.toLbl;
+
 import java.awt.GridLayout;
-import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import view.Img.Rotn;
 import controller.Controller;
 
 public class MapPanel extends JPanel
@@ -28,54 +37,54 @@ public class MapPanel extends JPanel
 		{
 			if (i == C.layout.getGenMin())
 			{
-				
-				add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Corner)));
+
+				add(toLbl(scale(getScaleBy(C), Corner)));
 			}
 			else if (i == C.layout.getGenMax() + 1)
 			{
-				add(Img.toLbl(Img.rotate(Img.Rotn.QUARTER, Img.scale(Img.getScaleBy(C), Img.Corner))));
+				add(toLbl(rotate(Rotn.QUARTER, scale(getScaleBy(C), Corner))));
 			}
 			else
 			{
-				add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Borderln)));
+				add(toLbl(scale(getScaleBy(C), Borderln)));
 			}
 		}
 		for (int index = C.layout.getGenMin(); index < C.layout.getGenMax(); index++)
 		{
-			add(Img.toLbl(Img.rotate(Img.Rotn.QUARTER, Img.scale(Img.getScaleBy(C), Img.Borderln))));
+			add(toLbl(rotate(Rotn.QUARTER, scale(getScaleBy(C), Borderln))));
 			for (int index1 = C.layout.getGenMin(); index1 < C.layout.getGenMax(); index1++)
 			{
 				if (C.layout.get()[index][index1])
 				{
 					if (index == C.layout.getGenCent() && index1 == C.layout.getGenCent())
 					{
-						add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Room)));
+						add(toLbl(scale(getScaleBy(C), Room)));
 					}
 					else
 					{
-						add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Room)));
+						add(toLbl(scale(getScaleBy(C), Room)));
 					}
 				}
 				else
 				{
-					add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Empty)));
+					add(toLbl(scale(getScaleBy(C), Empty)));
 				}
 			}
-			add(Img.toLbl(Img.rotate(Img.Rotn.QUARTER, Img.scale(Img.getScaleBy(C), Img.Borderln))));
+			add(toLbl(rotate(Rotn.QUARTER, scale(getScaleBy(C), Borderln))));
 		}
 		for (int i = C.layout.getGenMin(); i <= C.layout.getGenMax() + 1; i++)
 		{
 			if (i == C.layout.getGenMin())
 			{
-				add(Img.toLbl(Img.rotate(Img.Rotn.COUNTER_QUARTER, Img.scale(Img.getScaleBy(C), Img.Corner))));
+				add(toLbl(rotate(Rotn.COUNTER_QUARTER, scale(getScaleBy(C), Corner))));
 			}
 			else if (i == C.layout.getGenMax() + 1)
 			{
-				add(Img.toLbl(Img.rotate(Img.Rotn.HALF, Img.scale(Img.getScaleBy(C), Img.Corner))));
+				add(toLbl(rotate(Rotn.HALF, scale(getScaleBy(C), Corner))));
 			}
 			else
 			{
-				add(Img.toLbl(Img.scale(Img.getScaleBy(C), Img.Borderln)));
+				add(toLbl(scale(getScaleBy(C), Borderln)));
 			}
 		}
 	}
